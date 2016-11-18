@@ -4,10 +4,9 @@ public class HybridTrie {
 	
 	private char character;
 	private int value;
-	private HybridTrie inf;
-	private HybridTrie eq;
-	private HybridTrie sup;
+	private HybridTrie[] children = new HybridTrie[3];
 	
+	@SuppressWarnings("null")
 	public HybridTrie(){
 		this.setCharacter((Character) null);
 		this.setValue(0);
@@ -70,7 +69,6 @@ public class HybridTrie {
 		return character;
 	}
 
-
 	public void setCharacter(char c) {
 		this.character = c;
 	}
@@ -87,32 +85,32 @@ public class HybridTrie {
 
 
 	public HybridTrie getInf() {
-		return inf;
+		return this.children[0];
 	}
 
 
 	public void setInf(HybridTrie inf) {
-		this.inf = inf;
+		this.children[0] = inf;
 	}
 
 
 	public HybridTrie getEq() {
-		return eq;
+		return this.children[1];
 	}
 
 
 	public void setEq(HybridTrie eq) {
-		this.eq = eq;
+		this.children[1] = eq;
 	}
 
 
 	public HybridTrie getSup() {
-		return sup;
+		return this.children[2];
 	}
 
 
 	public void setSup(HybridTrie sup) {
-		this.sup = sup;
+		this.children[2] = sup;
 	}
 
 }
