@@ -29,27 +29,29 @@ public class HybridTrie {
 	public void addKey(String key, int value){
 		if (this.isEmpty()){
 			if(key.length() == 1){
+				if(this.getValue()==0){
+					this.setCharacter(key.charAt(0));
+					this.setValue(value);
+					this.setInf(new HybridTrie());
+					this.setEq(new HybridTrie());
+					this.setSup(new HybridTrie());
+				}
+			}
+			else{
 				this.setCharacter(key.charAt(0));
-				this.setValue(value);
 				this.setInf(new HybridTrie());
 				this.setEq(new HybridTrie());
 				this.setSup(new HybridTrie());
-			}
-			else{
-				HybridTrie temp = new HybridTrie(key.charAt(0),0,new HybridTrie(),new HybridTrie(),new HybridTrie());				
-				temp.getEq().addKey(key.substring(1, key.length()), value);
-				
-				this.setEq(temp);
-				System.out.println("test");
+				this.getEq().addKey(key.substring(1, key.length()), value);
 			}
 		}
 		else{
 			char c = key.charAt(0);
 			if (c < this.character){
-				this.getInf().addKey(key.substring(1, key.length()), value);			
+				this.getInf().addKey(key, value);			
 			}
 			else if (c > this.character){
-				this.getSup().addKey(key.substring(1, key.length()), value);
+				this.getSup().addKey(key, value);
 			}
 			else{
 				this.getEq().addKey(key.substring(1, key.length()), value);
@@ -68,16 +70,17 @@ public class HybridTrie {
 	public void displayWords(String current_word){
 		if(!this.isEmpty()){
 			if(!this.getInf().isEmpty()){
-				this.getInf().displayWords( current_word);
+				this.getInf().displayWords(current_word);
 			}
 			if(!this.getSup().isEmpty()){
 				this.getSup().displayWords(current_word);
 			}
 			if(!this.getEq().isEmpty()){
 				current_word+=this.getCharacter();
-				this.displayWords(current_word);
+				this.getEq().displayWords(current_word);
 			}
 			if(this.getValue()!= 0){
+				current_word+=this.getCharacter();
 				System.out.println(current_word);
 			}
 		}

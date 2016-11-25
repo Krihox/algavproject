@@ -20,35 +20,4 @@ public class DisplayHybridTrie {
 		
 		t.displayWords("");
     }
-	
-	/*public void displayWords(HybridTrie t, String current_word, int index, ArrayList<HybridTrie> t_list, ArrayList<String> str_list){
-		
-		if(!t.isEmpty()){
-			if(!t.getInf().isEmpty()){
-				t_list.add(index, t.getInf());
-				str_list.add(index, current_word);
-				index++;
-			}
-			if(!t.getSup().isEmpty()){
-				t_list.add(index, t.getSup());
-				str_list.add(index, current_word);
-				index++;
-			}
-			
-			System.out.println(t.getCharacter());
-			current_word += t.getCharacter();
-			
-			if(!t.getEq().isEmpty()){
-				displayWords(t.getEq(), current_word, index, t_list, str_list);
-			}
-			
-			if(!t_list.isEmpty()){
-				
-			}
-		}
-	}*/
-	
-	
-	
-	
 }
