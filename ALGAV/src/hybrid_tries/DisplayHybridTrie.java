@@ -1,7 +1,5 @@
 package hybrid_tries;
 
-import java.util.ArrayList;
-
 public class DisplayHybridTrie {
 
 	public static void main(String[] args) {
@@ -19,10 +17,11 @@ public class DisplayHybridTrie {
 		System.out.println("La racine est :" + t.getCharacter());
 		System.out.println("La racine est :" + t.getCharacter());
 		System.out.println("La racine est :" + t.getCharacter());
-        
+		
+		t.displayWords("");
     }
 	
-	public void displayWords(HybridTrie t, String current_word, int index, ArrayList<HybridTrie> t_list, ArrayList<String> str_list){
+	/*public void displayWords(HybridTrie t, String current_word, int index, ArrayList<HybridTrie> t_list, ArrayList<String> str_list){
 		
 		if(!t.isEmpty()){
 			if(!t.getInf().isEmpty()){
@@ -47,6 +46,9 @@ public class DisplayHybridTrie {
 				
 			}
 		}
-	}
+	}*/
+	
+	
+	
 	
 }

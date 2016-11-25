@@ -6,9 +6,8 @@ public class HybridTrie {
 	private int value;
 	private HybridTrie[] children = new HybridTrie[3];
 	
-	@SuppressWarnings("null")
 	public HybridTrie(){
-		this.setCharacter((Character) null);
+		this.setCharacter('0');
 		this.setValue(0);
 		this.setInf(null);
 		this.setEq(null);
@@ -29,7 +28,7 @@ public class HybridTrie {
 	 * */
 	public void addKey(String key, int value){
 		if (this.isEmpty()){
-			if(key.length() ==1){
+			if(key.length() == 1){
 				this.setCharacter(key.charAt(0));
 				this.setValue(value);
 				this.setInf(new HybridTrie());
@@ -41,6 +40,7 @@ public class HybridTrie {
 				temp.getEq().addKey(key.substring(1, key.length()), value);
 				
 				this.setEq(temp);
+				System.out.println("test");
 			}
 		}
 		else{
@@ -58,11 +58,29 @@ public class HybridTrie {
 	}
 	
 	public Boolean isEmpty(){
-		return this.getCharacter()==(Character)null 
+		return this.getCharacter()=='0'
 				&& this.getValue()==0 
 				&& this.getInf()==null 
 				&& this.getEq()==null 
 				&& this.getSup()==null;
+	}
+	
+	public void displayWords(String current_word){
+		if(!this.isEmpty()){
+			if(!this.getInf().isEmpty()){
+				this.getInf().displayWords( current_word);
+			}
+			if(!this.getSup().isEmpty()){
+				this.getSup().displayWords(current_word);
+			}
+			if(!this.getEq().isEmpty()){
+				current_word+=this.getCharacter();
+				this.displayWords(current_word);
+			}
+			if(this.getValue()!= 0){
+				System.out.println(current_word);
+			}
+		}
 	}
 
 	public char getCharacter() {
