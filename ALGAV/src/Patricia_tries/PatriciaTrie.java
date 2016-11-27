@@ -4,7 +4,7 @@ package Patricia_tries;
 public class PatriciaTrie {
 	String [] keys;
 	PatriciaTrie[]sons;
-	
+	int number_words=0;
 	
 	public PatriciaTrie(){
 		this.keys=new String[128];
@@ -52,18 +52,34 @@ public class PatriciaTrie {
 		return prefixe;
 	}
 	
-	public static void main(String [] args){
-		/*PatriciaTrie p = new PatriciaTrie();
-		
-		System.out.println(" value cle vide.." +p.getKey(0)+"..");*/
-		
-		
-		String a = "abcdefgh";
-		String b = "abcd";
-		String s = prefixe(a,b);
-		String w = a.substring(s.length(), a.length()-1);
-		
-		System.out.println("reste du mot " + w);
-	
+	public String notNullKey(){
+		int i = 0,n=0;
+		String notNull = null;
+		for(i= 0; i<this.getKeys().length;i++){
+			if(this.getKey(i) !=null){
+				notNull=this.getKey(i);
+				n++;
+			}
+		}
+		return (n==1)?notNull:null;
 	}
+	
+	public void printTrie(){
+		int i = 0;
+		for(i=0; i<128;i++){
+			String c = this.getKey(i);
+			if(c == null){
+				System.out.print("");
+			}else{
+				System.out.print(" *" + c + "* ");
+				if(this.getSon(i)!=null){
+					System.out.print(":");
+					this.getSon(i).printTrie();
+					System.out.println();
+				}
+			}
+		}
+		System.out.println();
+	}
+	
 }
