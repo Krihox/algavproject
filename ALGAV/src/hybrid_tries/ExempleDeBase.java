@@ -51,6 +51,14 @@ public class ExempleDeBase {
 		t.addKey("ecrire", cpt++);
 		t.addKey("?", cpt++);
 		
+		System.out.println(t.search("fait"));
+		System.out.println(t.search("clavie"));
+		System.out.println(t.search("clavier"));
+		System.out.println(t.search("clavierr"));
+		
+		System.out.println(t.countWords());
+		
+		
 		t.displayWords("");
     }
 }
