@@ -1,5 +1,7 @@
 package hybrid_tries;
 
+import java.util.ArrayList;
+
 public class HybridTrie {
 	
 	private char character;
@@ -108,6 +110,15 @@ public class HybridTrie {
 		
 	}
 	
+	public int countNill(){
+		if(!this.isEmpty()){
+			return 0 + this.getInf().countNill() + this.getEq().countNill() + this.getSup().countNill();
+		}
+		else{
+			return 1;
+		}
+	}
+	
 	public Boolean search(String word){
 		if(word.length() == 0){
 			return false;
@@ -140,6 +151,77 @@ public class HybridTrie {
 			return this.getEq().search(word.substring(1, word.length()));
 		}
 	}
+	
+	private int max(int a, int b, int c){
+		if (a>b && a>c)
+			return a;
+		if(b>a && b>c)
+			return b;
+		return c;
+	}
+	
+	/* returns the max height of a hybrid tree ; does count the empty leaf*/
+	public int height(){
+		if(!this.isEmpty()){
+			return 1 + max(this.getInf().height(),  this.getEq().height(), this.getSup().height());
+		}
+		else{
+			/* return 0 if we don't want to count the leaf in the calculation of the height*/
+			return 1;
+		}
+	}
+	
+	/*
+	public int averageHeight(ArrayList<Integer> leafs_height, int cpt_height){
+		if(this.isEmpty()){
+			return 0;
+		}
+		else if(this.getInf().isEmpty() && this.getEq().isEmpty() && this.getSup().isEmpty()){
+			leafs_height.add(cpt_height);
+		}
+		else{
+			cpt_height++;
+			return this.getInf().averageHeight(leafs_height, cpt_height) 
+					+ this.getEq().averageHeight(leafs_height, cpt_height) 
+					+ this.getSup().averageHeight(leafs_height, cpt_height);
+		}
+				
+	}*/
+	
+	/*
+	public int numberPrefixOf(String word){
+		if(!this.search(word)){
+			return 0;
+		}
+		char c = word.charAt(0);
+		if (c < this.character){
+			if(this.getInf().isEmpty()){
+				return false;
+			}
+			return this.getInf().search(word);			
+		}
+		else if (c > this.character){
+			if(this.getSup().isEmpty()){
+				return false;
+			}
+			return this.getSup().search(word);
+		}
+		else{
+			if(word.length()==1){
+				if (this.getValue() != 0){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			if(this.getEq().isEmpty()){
+				return false;
+			}
+			return this.getEq().search(word.substring(1, word.length()));
+		}
+		
+	}*/
 
 	public char getCharacter() {
 		return character;
