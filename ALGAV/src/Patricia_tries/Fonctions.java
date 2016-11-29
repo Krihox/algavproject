@@ -162,30 +162,99 @@ public class Fonctions {
 		return null;
 	}
 
-	
 	public static PatriciaTrie addListOfWords(String phrase, PatriciaTrie a){
 		String [] words = phrase.split(" ");
 		int i=0;
 		for(i=0;i<words.length;i++){
 			words[i]=words[i].concat(" ");
 			System.out.println("WOrd i = "+i+" words[i] =*"+words[i]+"*");
-			if((a=addWord(words[i],a))!=null){
-				a.number_words++;
-			}
 			a.printTrie();
 		}
 		return a;
 	}
-	
-	
-	public static void main(String [] args){
-		PatriciaTrie p = new PatriciaTrie();
-		String word = "A quel genial professeur de dactylographie sommes nous redevables de la superbe";
-		addListOfWords(word,p);
-		System.out.println(" SUPPRESSION \n");
-		deleteWord("redevons ", p);
-		p.printTrie();
-		System.out.println("Nombre de mots" + p.number_words);
-	
+
+	public static boolean searchWord(String word,PatriciaTrie a){
+		//System.out.println("Mot =*" + word+"*");
+		if(a==null || word.length()==0){
+			return false;
+		}
+		
+		String current_key = a.getKey(word.charAt(0));
+		System.out.println("Current="+current_key+"*");
+		if(current_key!=null){
+			if(current_key.equals(word)){
+				return true;
+			}
+			else if(current_key.length() > word.length()){
+				System.out.println("Your word does not exist");
+				return false;
+			}
+			else{
+				String prefixe = prefixe(current_key,word);
+				if(prefixe.length()>current_key.length()){
+					System.out.println("Your word does not exist");
+					return false;
+				}
+				else{
+					String nextWord = word.substring(prefixe.length());
+					if(a.getSon(prefixe.charAt(0))==null){
+						return false;
+					}
+					else{
+						return searchWord(nextWord,a.getSon(prefixe.charAt(0)));
+					}
+				}
+			}
+		}
+		return false;
 	}
+	
+	public static int compteMots(PatriciaTrie a){
+		int res =0;
+		if(a==null){
+			return 0;
+		}
+		for(int i =0;i<a.getSons().length;i++){
+			if(a.getKey(i)!=null && a.getSon(i)==null){
+				if(a.getKey(i).contains(" ")){
+					res+=1;
+				}
+			}else if(a.getKey(i)!=null){
+				res+=compteMots(a.getSon(i));
+			}
+		}
+		return res;
+		
+	}
+	public static int searchPrefixe(String word, PatriciaTrie a){
+		if(a==null || word.length()==0){
+			return 0;
+		}
+		String current_key = a.getKey(word.charAt(0));
+		PatriciaTrie current_node=a.getSon(word.charAt(0));
+		int res=0;
+		System.out.println("Current="+current_key+"*");
+		if(current_key!=null){
+			if(current_key.equals(word)){
+				PatriciaTrie sub = a.getSon(word.charAt(0));
+				for(int i=0;i<sub.getSons().length;i++){
+					if(sub.getSon(i)!=null){
+						System.out.println("res = "+res);
+						res+=1;
+					}
+				}
+			}else{
+				String prefixe = prefixe(word,current_key);
+				if(prefixe!=null){
+					if(current_node!=null){
+						for(int i =0;i<current_node.sons.length;i++){
+							
+						}
+					}
+				}
+			}
+		}
+		return res;
+	}
+
 }
