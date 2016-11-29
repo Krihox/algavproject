@@ -20,5 +20,7 @@ public class DisplayHybridTrie {
 		System.out.println();
 		
 		t.displayWords("");
+		
+		System.out.println(t.numberPrefixOf("at"));
     }
 }

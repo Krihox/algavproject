@@ -188,40 +188,55 @@ public class HybridTrie {
 				
 	}*/
 	
-	/*
-	public int numberPrefixOf(String word){
-		if(!this.search(word)){
-			return 0;
-		}
+	private HybridTrie searchWordTree(String word){
+		
 		char c = word.charAt(0);
-		if (c < this.character){
-			if(this.getInf().isEmpty()){
-				return false;
-			}
-			return this.getInf().search(word);			
+		
+		if(word.length() == 0){
+			return null;
 		}
-		else if (c > this.character){
-			if(this.getSup().isEmpty()){
-				return false;
+		if(word.length() == 1){
+			if (c == this.character){
+				return this;
 			}
-			return this.getSup().search(word);
 		}
-		else{
-			if(word.length()==1){
-				if (this.getValue() != 0){
-					return true;
-				}
-				else{
-					return false;
-				}
+		if(c<this.character){
+			if(!this.getInf().isEmpty())
+				return this.getInf().searchWordTree(word);
+			else
+				return null;
+		}
+		if(c>this.character){
+			if(!this.getSup().isEmpty())
+				return this.getSup().searchWordTree(word);
+			else
+				return null;
+		}
+		if(c==this.character){
+			if(!this.getEq().isEmpty()){
+				return this.getEq().searchWordTree(word.substring(1, word.length()));
 			}
-			if(this.getEq().isEmpty()){
-				return false;
-			}
-			return this.getEq().search(word.substring(1, word.length()));
 		}
 		
-	}*/
+		return null;		
+	}
+	
+	
+	public int numberPrefixOf(String word){
+		HybridTrie t = this.searchWordTree(word);
+		
+		if(t == null){
+			return 0;
+		}
+		else{
+			if(t.getValue() != 0){
+				return 1+t.getEq().countWords();
+			}
+			else{
+				return t.getEq().countWords();
+			}
+		}
+	}
 
 	public char getCharacter() {
 		return character;

@@ -51,14 +51,18 @@ public class ExempleDeBase {
 		t.addKey("ecrire", cpt++);
 		t.addKey("?", cpt++);
 		
-		System.out.println(t.search("fait"));
-		System.out.println(t.search("clavie"));
-		System.out.println(t.search("clavier"));
-		System.out.println(t.search("clavierr"));
-		
-		System.out.println(t.countWords());
-		
-		
 		t.displayWords("");
+		
+		System.out.println("le mot 'fait' existe : " + t.search("fait"));
+		System.out.println("le mot 'clavie' existe : " + t.search("clavie"));
+		System.out.println("le mot 'clavier' existe :" + t.search("clavier"));
+		System.out.println("le mot 'clavierr' existe : " + t.search("clavierr"));
+		
+		System.out.println("nombre de mots : " + t.countWords());
+		
+		System.out.println("nombre de mots prefixés par 'dactylo' : " + t.numberPrefixOf("dactylo"));
+		System.out.println("nombre de mots prefixés par 'p' : " + t.numberPrefixOf("p"));
+		System.out.println("nombre de mots prefixés par 'abc' : " + t.numberPrefixOf("abc"));
+		
     }
 }
