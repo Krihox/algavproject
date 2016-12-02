@@ -48,20 +48,18 @@ public class HybridTrie {
 			}
 		}
 		else{
-			if(key.length() == 1){
-				this.setValue(value);
+			char c = key.charAt(0);
+			if (c < this.character){
+				this.getInf().addKey(key, value);			
+			}
+			else if (c > this.character){
+				this.getSup().addKey(key, value);
 			}
 			else{
-				char c = key.charAt(0);
-				if (c < this.character){
-					this.getInf().addKey(key, value);			
-				}
-				else if (c > this.character){
-					this.getSup().addKey(key, value);
-				}
-				else{
+				if(key.length() == 1)
+					this.setValue(value);
+				else
 					this.getEq().addKey(key.substring(1, key.length()), value);
-				}
 			}
 		}
 	}
@@ -171,22 +169,41 @@ public class HybridTrie {
 		}
 	}
 	
-	/*
-	public int averageHeight(ArrayList<Integer> leafs_height, int cpt_height){
-		if(this.isEmpty()){
+	private Boolean isLeaf(){
+		if (this.getInf().isEmpty()
+				&& this.getEq().isEmpty()
+				&& this.getSup().isEmpty())
+			return true;
+		return false;
+	}
+	
+	private int nbLeafs(){
+		if (this.isEmpty())
 			return 0;
-		}
-		else if(this.getInf().isEmpty() && this.getEq().isEmpty() && this.getSup().isEmpty()){
-			leafs_height.add(cpt_height);
-		}
+		if(this.isLeaf())
+			return 1;
 		else{
-			cpt_height++;
-			return this.getInf().averageHeight(leafs_height, cpt_height) 
-					+ this.getEq().averageHeight(leafs_height, cpt_height) 
-					+ this.getSup().averageHeight(leafs_height, cpt_height);
+			return this.getInf().nbLeafs() + this.getEq().nbLeafs() + this.getSup().nbLeafs();
 		}
-				
-	}*/
+	}
+	
+	private int totalLeafDepth(int depth){
+		if(this.isEmpty())
+			return 0;
+		if(this.isLeaf())
+			return depth;
+		else{
+			depth++;
+			return this.getInf().totalLeafDepth(depth)
+					+ this.getEq().totalLeafDepth(depth)
+					+ this.getSup().totalLeafDepth(depth);
+		}
+	}
+	
+	public int averageDepth(){
+		//0 if root shouldn't be included into the depth ; 1 if it does
+		return this.totalLeafDepth(0) / this.nbLeafs();
+	}
 	
 	private HybridTrie searchWordTree(String word){
 		
@@ -222,6 +239,50 @@ public class HybridTrie {
 	}
 	
 	
+	private Boolean delWord(String word){
+		
+		if(word.length() == 1){
+			if(this.getCharacter() == word.charAt(0)){
+				this.value = 0;
+				return (this.getInf().isEmpty() 
+						&& this.getEq().isEmpty() 
+						&& this.getSup().isEmpty());
+			}
+		}
+		
+		char c = word.charAt(0);
+		if(c < this.getCharacter()){
+			if(this.getInf().delWord(word)){
+				this.setInf(new HybridTrie());
+			}
+		}
+		if(c > this.getCharacter()){
+			if(this.getSup().delWord(word)){
+				this.setSup(new HybridTrie());
+			}
+		}
+		if(c == this.getCharacter()){
+			if(this.getEq().delWord(word.substring(1, word.length()))){
+				this.setEq(new HybridTrie());
+			}
+		}
+		return (this.getInf().isEmpty() 
+				&& this.getEq().isEmpty() 
+				&& this.getSup().isEmpty()
+				&& this.getValue() == 0);
+		
+	}
+	
+	public HybridTrie deleteWord(String word){
+		HybridTrie t = this.clone();
+		if(t.search(word)){
+			t.delWord(word);
+			return t;
+		}
+		return t;
+	}
+	
+	
 	public int numberPrefixOf(String word){
 		HybridTrie t = this.searchWordTree(word);
 		
@@ -236,6 +297,30 @@ public class HybridTrie {
 				return t.getEq().countWords();
 			}
 		}
+	}
+	
+	public HybridTrie clone(){
+		HybridTrie t = new HybridTrie();
+		
+		t.setCharacter(this.getCharacter());
+		t.setValue(this.getValue());
+		
+		if(!this.getEq().isEmpty())
+			t.setEq(this.getEq().clone());
+		else
+			t.setEq(new HybridTrie());
+		
+		if(!this.getInf().isEmpty())
+			t.setInf(this.getInf().clone());
+		else
+			t.setInf(new HybridTrie());
+		
+		if(!this.getSup().isEmpty())
+			t.setSup(this.getSup().clone());
+		else
+			t.setSup(new HybridTrie());
+
+		return t;
 	}
 
 	public char getCharacter() {

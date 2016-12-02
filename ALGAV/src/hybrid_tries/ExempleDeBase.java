@@ -60,6 +60,8 @@ public class ExempleDeBase {
 		
 		System.out.println("nombre de mots : " + t.countWords());
 		
+		System.out.println("hauteur moyenne : " + t.averageDepth());
+		
 		System.out.println("nombre de mots prefixés par 'dactylo' : " + t.numberPrefixOf("dactylo"));
 		System.out.println("nombre de mots prefixés par 'p' : " + t.numberPrefixOf("p"));
 		System.out.println("nombre de mots prefixés par 'abc' : " + t.numberPrefixOf("abc"));

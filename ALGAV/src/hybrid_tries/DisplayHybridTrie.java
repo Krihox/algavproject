@@ -21,6 +21,17 @@ public class DisplayHybridTrie {
 		
 		t.displayWords("");
 		
+		HybridTrie t2 = t.deleteWord("att");
+		System.out.println("t2 words :");
+		t2.displayWords("");
+		
+		HybridTrie t3 = t.deleteWord("attends");
+		System.out.println("t3 words :");
+		t3.displayWords("");
+		
+		
+		System.out.println("profondeur moyenne : " + t.averageDepth());
+		
 		System.out.println(t.numberPrefixOf("at"));
     }
 }
