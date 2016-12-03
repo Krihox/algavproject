@@ -83,7 +83,6 @@ public class PatriciaTrie {
 				System.out.print(" "+ c);
 				if(this.getSon(i)!=null){
 					this.getSon(i).printTrie();
-					//System.out.println();
 				}
 			}
 		}
