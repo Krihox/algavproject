@@ -205,7 +205,53 @@ public class HybridTrie {
 		return this.totalLeafDepth(0) / this.nbLeafs();
 	}
 	
-	private HybridTrie searchWordTree(String word){
+	
+	private Boolean delWord(String word){
+		
+		char c = word.charAt(0);
+		
+		if(word.length() == 1){
+			if(this.getCharacter() == c){
+				this.value = 0;
+				return (this.getInf().isEmpty() 
+						&& this.getEq().isEmpty() 
+						&& this.getSup().isEmpty());
+			}
+		}
+		
+		if(c < this.getCharacter()){
+			if(this.getInf().delWord(word)){
+				this.setInf(new HybridTrie());
+			}
+		}
+		if(c > this.getCharacter()){
+			if(this.getSup().delWord(word)){
+				this.setSup(new HybridTrie());
+			}
+		}
+		if(c == this.getCharacter()){
+			if(this.getEq().delWord(word.substring(1, word.length()))){
+				this.setEq(new HybridTrie());
+			}
+		}
+		return (this.getInf().isEmpty() 
+				&& this.getEq().isEmpty() 
+				&& this.getSup().isEmpty()
+				&& this.getValue() == 0);
+		
+	}
+	
+	public HybridTrie deleteWord(String word){
+		HybridTrie t = this.clone();
+		if(t.search(word)){
+			t.delWord(word);
+			return t;
+		}
+		return t;
+	}
+	
+	
+private HybridTrie searchWordTree(String word){
 		
 		char c = word.charAt(0);
 		
@@ -236,50 +282,6 @@ public class HybridTrie {
 		}
 		
 		return null;		
-	}
-	
-	
-	private Boolean delWord(String word){
-		
-		if(word.length() == 1){
-			if(this.getCharacter() == word.charAt(0)){
-				this.value = 0;
-				return (this.getInf().isEmpty() 
-						&& this.getEq().isEmpty() 
-						&& this.getSup().isEmpty());
-			}
-		}
-		
-		char c = word.charAt(0);
-		if(c < this.getCharacter()){
-			if(this.getInf().delWord(word)){
-				this.setInf(new HybridTrie());
-			}
-		}
-		if(c > this.getCharacter()){
-			if(this.getSup().delWord(word)){
-				this.setSup(new HybridTrie());
-			}
-		}
-		if(c == this.getCharacter()){
-			if(this.getEq().delWord(word.substring(1, word.length()))){
-				this.setEq(new HybridTrie());
-			}
-		}
-		return (this.getInf().isEmpty() 
-				&& this.getEq().isEmpty() 
-				&& this.getSup().isEmpty()
-				&& this.getValue() == 0);
-		
-	}
-	
-	public HybridTrie deleteWord(String word){
-		HybridTrie t = this.clone();
-		if(t.search(word)){
-			t.delWord(word);
-			return t;
-		}
-		return t;
 	}
 	
 	
