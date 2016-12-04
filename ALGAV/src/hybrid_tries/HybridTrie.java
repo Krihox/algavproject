@@ -72,7 +72,7 @@ public class HybridTrie {
 				&& this.getSup()==null;
 	}
 	
-	public void displayWords(String current_word){
+	/*public void displayWords(String current_word){
 		if(!this.isEmpty()){
 			if(!this.getInf().isEmpty()){
 				this.getInf().displayWords(current_word);
@@ -89,6 +89,27 @@ public class HybridTrie {
 					current_word+=this.getCharacter();
 				}
 				System.out.println(current_word);
+			}
+		}
+	}*/
+	
+	public void displayWords(String current_word){
+		if(!this.isEmpty()){
+			if(!this.getInf().isEmpty()){
+				this.getInf().displayWords(current_word);
+			}
+			if(this.getValue()!= 0){
+				current_word+=this.getCharacter();
+				System.out.println(current_word);
+				current_word = current_word.substring(0,current_word.length()-1);
+			}
+			if(!this.getEq().isEmpty()){
+				current_word+=this.getCharacter();
+				this.getEq().displayWords(current_word);
+				current_word = current_word.substring(0,current_word.length()-1);
+			}
+			if(!this.getSup().isEmpty()){
+				this.getSup().displayWords(current_word);
 			}
 		}
 	}
