@@ -4,10 +4,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class Fonctions {
 	
+	/** methode prefixe
+	 * @param a : String
+	 * @param b : String
+	 * @return le prefixe en commun entre a et b
+	 */
 	public static String prefixe (String a, String b){
 		int min = Math.min(a.length(), b.length());
 		int i=0;
@@ -23,6 +31,12 @@ public class Fonctions {
 		return prefixe;
 	}
 	
+	/** methode addWord ajoute un mot dans le patricia trie
+	 * 
+	 * @param word : String
+	 * @param a : PatriciaTrie
+	 * @return : PatriciaTrie a
+	 */
 	public static PatriciaTrie addWord(String word, PatriciaTrie a){
 		if( (a==null || a.getKey(word.charAt(0))==null) ){
 			if(a==null){
@@ -75,6 +89,12 @@ public class Fonctions {
 		return a;
 	}
 
+	/** methode deleteWord supprime un mot d un patricia trie (s'il existe)
+	 * 
+	 * @param word : String
+	 * @param a : PatriciaTrie
+	 * @return PatriciaTrie
+	 */
 	public static PatriciaTrie deleteWord(String word,PatriciaTrie a){	
 		if(word.length()==0){
 			return null;
@@ -102,7 +122,6 @@ public class Fonctions {
 						return a;
 					}
 					String s = new String();
-					//t.printTrie();
 					if((s=t.notNullKey())==null){
 						a.setKey(nextWord.charAt(0),new String());
 						a.setSon(nextWord.charAt(0),t);
@@ -128,6 +147,12 @@ public class Fonctions {
 		return null;
 	}
 
+	/** methode addListOfWords, ajoute un ensemble de mots (d'une phrase) dans un patricia trie
+	 * 
+	 * @param phrase : String
+	 * @param a : PatriciaTrie
+	 * @return PatriciaTrie
+	 */
 	public static PatriciaTrie addListOfWords(String phrase, PatriciaTrie a){
 		String [] words = phrase.split(" ");
 		int i=0;
@@ -138,6 +163,12 @@ public class Fonctions {
 		return a;
 	}
 
+	/** methode searchWord, recherche un certain mot dans un patricia trie
+	 * 
+	 * @param word : String
+	 * @param a : PatriciaTrie
+	 * @return : boolean
+	 */
 	public static boolean searchWord(String word,PatriciaTrie a){
 		if(a==null || word.length()==0){
 			return false;
@@ -172,6 +203,11 @@ public class Fonctions {
 		return false;
 	}
 	
+	/** méthode compteMots, compte le nombre de mots, dans un patricia-trie
+	 * 
+	 * @param a : PatriciaTrie
+	 * @return : int
+	 */
 	public static int compteMots(PatriciaTrie a){
 		int res =0;
 		if(a==null){
@@ -190,6 +226,11 @@ public class Fonctions {
 		
 	}
 
+	/** methode compteNil, compte le nombre de noeud vide, dans un patricia-trie
+	 * 
+	 * @param a : PatriciaTrie
+	 * @return : int
+	 */
 	public static int compteNil(PatriciaTrie a){
 		int res =0;
 		if(a==null){
@@ -205,7 +246,11 @@ public class Fonctions {
 		return res;
 		
 	}
-	
+	/** methode hauteur, calcule la hauteur d'un patricia-trie
+	 * 
+	 * @param a : PatriciaTrie
+	 * @return : int
+	 */
 	public static int hauteur (PatriciaTrie a){
 		if(a==null){
 			return 0;
@@ -221,6 +266,11 @@ public class Fonctions {
 		return 1+max;
 	}
 
+	/** methode profondeurMoyenne, calcule la profondeur moyenne d'un arbre
+	 * 
+	 * @param a : PatriciaTtrie
+	 * @return : int
+	 */
 	public static int profondeurMoyenne (PatriciaTrie a){
 		if(a==null){
 			return 0;
@@ -238,6 +288,12 @@ public class Fonctions {
 		return (max/nb_noeud);
 	}
 	
+	/** methode searchPrefixe, compte le nombre de mots ayant un certain prefixe
+	 * 
+	 * @param word : String
+	 * @param a : PatriciaTrie
+	 * @return : int
+	 */
 	public static int searchPrefixe(String word, PatriciaTrie a){
 		if(a==null || word.length()==0){
 			return 0;
@@ -271,6 +327,11 @@ public class Fonctions {
 		return res;
 	}
 
+	/** methode fill_PatriciaTrie, creer un patricia-trie et le remplit avec les mots contenus dan un fichier
+	 * 
+	 * @param file : String 
+	 * @return : PatriciaTrie
+	 */
 	public static PatriciaTrie fill_PatriciaTrie(String file){
 		try(BufferedReader br= new BufferedReader(new FileReader(file))){
 			long deb = System.currentTimeMillis();
@@ -291,6 +352,11 @@ public class Fonctions {
 		}
 	}
 
+	/** methode listPath, liste le nom de tous les fichiers present dans un repertoire donné
+	 * 
+	 * @param path : File
+	 * @return : String []
+	 */
 	public static String[] listPath(File path) {
 	    File files[];
 	    files = path.listFiles();
@@ -300,5 +366,6 @@ public class Fonctions {
 	      fichiers[i]=files[i].toString();
 	    }
 	    return fichiers;
-	  }
+	  }	
+
 }
