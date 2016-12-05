@@ -11,9 +11,12 @@ public class DisplayHybridTrie {
 		t.addKey("attends", 4);
 		
 		System.out.println("La racine est :" + t.getCharacter());
-		System.out.println("Le fils gauche de la racine est :" + t.getInf().getCharacter());
-		System.out.println("Le fils du milieu de la racine est :" + t.getEq().getCharacter());
-		System.out.println("Le fils droit de la racine est :" + t.getSup().getCharacter());
+		if(t.getInf() != null)
+			System.out.println("Le fils gauche de la racine est :" + t.getInf().getCharacter());
+		if(t.getEq() != null)
+			System.out.println("Le fils du milieu de la racine est :" + t.getEq().getCharacter());
+		if(t.getSup() != null)
+			System.out.println("Le fils droit de la racine est :" + t.getSup().getCharacter());
 		
 		System.out.println(t.countNill());
 		System.out.println(t.height());

@@ -31,35 +31,40 @@ public class HybridTrie {
 	public void addKey(String key, int value){
 		if (this.isEmpty()){
 			if(key.length() == 1){
-				if(this.getValue()==0){
-					this.setCharacter(key.charAt(0));
-					this.setValue(value);
-					this.setInf(new HybridTrie());
-					this.setEq(new HybridTrie());
-					this.setSup(new HybridTrie());
-				}
+				this.setCharacter(key.charAt(0));
+				this.setValue(value);
+				this.setInf(null);
+				this.setEq(null);
+				this.setSup(null);
 			}
 			else{
 				this.setCharacter(key.charAt(0));
-				this.setInf(new HybridTrie());
+				this.setInf(null);
 				this.setEq(new HybridTrie());
-				this.setSup(new HybridTrie());
+				this.setSup(null);
 				this.getEq().addKey(key.substring(1, key.length()), value);
 			}
 		}
 		else{
 			char c = key.charAt(0);
 			if (c < this.character){
+				if(this.getInf() == null)
+					this.setInf(new HybridTrie());				
 				this.getInf().addKey(key, value);			
 			}
 			else if (c > this.character){
+				if(this.getSup() == null)
+					this.setSup(new HybridTrie());
 				this.getSup().addKey(key, value);
 			}
 			else{
 				if(key.length() == 1)
 					this.setValue(value);
-				else
+				else{
+					if(this.getEq() == null)
+						this.setEq(new HybridTrie());
 					this.getEq().addKey(key.substring(1, key.length()), value);
+				}
 			}
 		}
 	}
@@ -72,50 +77,29 @@ public class HybridTrie {
 				&& this.getSup()==null;
 	}
 	
-	/*public void displayWords(String current_word){
-		if(!this.isEmpty()){
-			if(!this.getInf().isEmpty()){
-				this.getInf().displayWords(current_word);
-			}
-			if(!this.getSup().isEmpty()){
-				this.getSup().displayWords(current_word);
-			}
-			if(!this.getEq().isEmpty()){
-				current_word+=this.getCharacter();
-				this.getEq().displayWords(current_word);
-			}
-			if(this.getValue()!= 0){
-				if(this.getEq().isEmpty()){
-					current_word+=this.getCharacter();
-				}
-				System.out.println(current_word);
-			}
-		}
-	}*/
 	
 	public void displayWords(String current_word){
-		if(!this.isEmpty()){
-			if(!this.getInf().isEmpty()){
-				this.getInf().displayWords(current_word);
-			}
-			if(this.getValue()!= 0){
-				current_word+=this.getCharacter();
-				System.out.println(current_word);
-				current_word = current_word.substring(0,current_word.length()-1);
-			}
-			if(!this.getEq().isEmpty()){
-				current_word+=this.getCharacter();
-				this.getEq().displayWords(current_word);
-				current_word = current_word.substring(0,current_word.length()-1);
-			}
-			if(!this.getSup().isEmpty()){
-				this.getSup().displayWords(current_word);
-			}
+		if(!(this.getInf() == null)){
+			this.getInf().displayWords(current_word);
+		}
+		if(this.getValue()!= 0){
+			current_word+=this.getCharacter();
+			System.out.println(current_word);
+			current_word = current_word.substring(0,current_word.length()-1);
+		}
+		if(!(this.getEq() == null)){
+			current_word+=this.getCharacter();
+			this.getEq().displayWords(current_word);
+			current_word = current_word.substring(0,current_word.length()-1);
+		}
+		if(!(this.getSup() == null)){
+			this.getSup().displayWords(current_word);
 		}
 	}
 	
-	public int countWords(){
-		if(!this.isEmpty()){
+	// Version avec les 'nill' initialisés en tant que noeuds vides
+	/*public int countWords(){
+		if(!this == null){
 			if(this.getValue() != 0){
 				return 1 + this.getInf().countWords() + this.getEq().countWords() + this.getSup().countWords();
 			}
@@ -127,14 +111,135 @@ public class HybridTrie {
 			return 0;
 		}
 		
+	}*/
+
+	public int countWords(){
+		
+		if(this.getValue() != 0){
+			if(!(this.getInf() == null)){
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return 1 + this.getInf().countWords() + this.getEq().countWords() + this.getSup().countWords();
+					}
+					else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
+						return 1 + this.getInf().countWords() + this.getEq().countWords();
+					}
+				}
+				else{ // this.getInf is non-null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return 1 + this.getInf().countWords() + this.getSup().countWords();
+					}
+					else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
+						return 1 + this.getInf().countWords();
+					}
+				}
+			}
+			else{ //this.getInf is null
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return 1 + this.getEq().countWords() + this.getSup().countWords();
+					}
+					else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
+						return 1 + this.getEq().countWords();
+					}
+				}
+				else{ // this.getInf is null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return 1 + this.getSup().countWords();
+					}
+					else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
+						return 1;
+					}
+				}
+			}
+		}
+		else{
+			if(!(this.getInf() == null)){
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return 0 + this.getInf().countWords() + this.getEq().countWords() + this.getSup().countWords();
+					}
+					else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
+						return 0 + this.getInf().countWords() + this.getEq().countWords();
+					}
+				}
+				else{ // this.getInf is non-null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return 0 + this.getInf().countWords() + this.getSup().countWords();
+					}
+					else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
+						return 0 + this.getInf().countWords();
+					}
+				}
+			}
+			else{ //this.getInf is null
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return 0 + this.getEq().countWords() + this.getSup().countWords();
+					}
+					else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
+						return 0 + this.getEq().countWords();
+					}
+				}
+				else{ // this.getInf is null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return 0 + this.getSup().countWords();
+					}
+					else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
+						return 0;
+					}
+				}
+			}
+		}
 	}
 	
-	public int countNill(){
+
+	// Version avec les 'nill' initialisés en tant que noeuds vides
+	/*public int countNill(){
 		if(!this.isEmpty()){
 			return 0 + this.getInf().countNill() + this.getEq().countNill() + this.getSup().countNill();
 		}
 		else{
 			return 1;
+		}
+	}*/
+	
+	public int countNill(){
+		if(!(this.getInf() == null)){
+			if(!(this.getEq() == null)){
+				if(!(this.getSup() == null)){
+					return this.getInf().countNill() + this.getEq().countNill() + this.getSup().countNill();
+				}
+				else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
+					return 1 + this.getInf().countNill() + this.getEq().countNill();
+				}
+			}
+			else{ // this.getInf is non-null ; this.getEq is null
+				if(!(this.getSup() == null)){
+					return 1 + this.getInf().countNill() + this.getSup().countNill();
+				}
+				else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
+					return 2 + this.getInf().countNill();
+				}
+			}
+		}
+		else{ //this.getInf is null
+			if(!(this.getEq() == null)){
+				if(!(this.getSup() == null)){
+					return 1 + this.getEq().countNill() + this.getSup().countNill();
+				}
+				else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
+					return 2 + this.getEq().countNill();
+				}
+			}
+			else{ // this.getInf is null ; this.getEq is null
+				if(!(this.getSup() == null)){
+					return 2 + this.getSup().countNill();
+				}
+				else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
+					return 3;
+				}
+			}
 		}
 	}
 	
@@ -144,13 +249,13 @@ public class HybridTrie {
 		}
 		char c = word.charAt(0);
 		if (c < this.character){
-			if(this.getInf().isEmpty()){
+			if(this.getInf() == null){
 				return false;
 			}
 			return this.getInf().search(word);			
 		}
 		else if (c > this.character){
-			if(this.getSup().isEmpty()){
+			if(this.getSup() == null){
 				return false;
 			}
 			return this.getSup().search(word);
@@ -164,7 +269,7 @@ public class HybridTrie {
 					return false;
 				}
 			}
-			if(this.getEq().isEmpty()){
+			if(this.getEq() == null){
 				return false;
 			}
 			return this.getEq().search(word.substring(1, word.length()));
@@ -179,26 +284,65 @@ public class HybridTrie {
 		return c;
 	}
 	
-	/* returns the max height of a hybrid tree ; does count the empty leaf*/
-	public int height(){
+	// Version avec les 'nill' initialisés en tant que noeuds vides
+	/*public int height(){
 		if(!this.isEmpty()){
 			return 1 + max(this.getInf().height(),  this.getEq().height(), this.getSup().height());
 		}
 		else{
-			/* return 0 if we don't want to count the leaf in the calculation of the height*/
 			return 1;
+		}
+	}*/
+	
+	public int height(){
+		if(!(this.getInf() == null)){
+			if(!(this.getEq() == null)){
+				if(!(this.getSup() == null)){
+					return 1 + max(this.getInf().height(), this.getEq().height(), this.getSup().height());
+				}
+				else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
+					return 1 + max(this.getInf().height(), this.getEq().height(), 0);
+				}
+			}
+			else{ // this.getInf is non-null ; this.getEq is null
+				if(!(this.getSup() == null)){
+					return 1 + max(this.getInf().height(), 0, this.getSup().height());
+				}
+				else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
+					return 1 + this.getInf().height();
+				}
+			}
+		}
+		else{ //this.getInf is null
+			if(!(this.getEq() == null)){
+				if(!(this.getSup() == null)){
+					return 1 + max(0, this.getEq().height(), this.getSup().height());
+				}
+				else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
+					return 1 + this.getEq().height();
+				}
+			}
+			else{ // this.getInf is null ; this.getEq is null
+				if(!(this.getSup() == null)){
+					return 1 + this.getSup().height();
+				}
+				else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
+					return 1;
+				}
+			}
 		}
 	}
 	
 	private Boolean isLeaf(){
-		if (this.getInf().isEmpty()
-				&& this.getEq().isEmpty()
-				&& this.getSup().isEmpty())
+		if (this.getInf() == null
+				&& this.getEq() == null
+				&& this.getSup() == null)
 			return true;
 		return false;
 	}
 	
-	private int nbLeafs(){
+	// Version avec les 'nill' initialisés en tant que noeuds vides
+	/*private int nbLeafs(){
 		if (this.isEmpty())
 			return 0;
 		if(this.isLeaf())
@@ -206,9 +350,55 @@ public class HybridTrie {
 		else{
 			return this.getInf().nbLeafs() + this.getEq().nbLeafs() + this.getSup().nbLeafs();
 		}
+	}*/
+	
+	private int nbLeafs(){
+		if (this.isEmpty())
+			return 0;
+		if(this.isLeaf())
+			return 1;
+		else{
+			if(!(this.getInf() == null)){
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return this.getInf().nbLeafs() + this.getEq().nbLeafs() + this.getSup().nbLeafs();
+					}
+					else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
+						return this.getInf().nbLeafs() + this.getEq().nbLeafs();
+					}
+				}
+				else{ // this.getInf is non-null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return this.getInf().nbLeafs() + this.getSup().nbLeafs();
+					}
+					else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
+						return this.getInf().nbLeafs();
+					}
+				}
+			}
+			else{ //this.getInf is null
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return this.getEq().nbLeafs() + this.getSup().nbLeafs();
+					}
+					else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
+						return this.getEq().nbLeafs();
+					}
+				}
+				else{ // this.getInf is null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return this.getSup().nbLeafs();
+					}
+					else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
+						  // case already treated with isLeaf() ...
+						return 1;
+					}
+				}
+			}
+		}
 	}
 	
-	private int totalLeafDepth(int depth){
+	/*private int totalLeafDepth(int depth){
 		if(this.isEmpty())
 			return 0;
 		if(this.isLeaf())
@@ -218,6 +408,53 @@ public class HybridTrie {
 			return this.getInf().totalLeafDepth(depth)
 					+ this.getEq().totalLeafDepth(depth)
 					+ this.getSup().totalLeafDepth(depth);
+		}
+	}*/
+	
+	private int totalLeafDepth(int depth){
+		if(this.isEmpty())
+			return 0;
+		if(this.isLeaf())
+			return depth;
+		else{
+			depth++;
+			if(!(this.getInf() == null)){
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return this.getInf().totalLeafDepth(depth) + this.getEq().totalLeafDepth(depth) + this.getSup().totalLeafDepth(depth);
+					}
+					else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
+						return this.getInf().totalLeafDepth(depth) + this.getEq().totalLeafDepth(depth);
+					}
+				}
+				else{ // this.getInf is non-null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return this.getInf().totalLeafDepth(depth) + this.getSup().totalLeafDepth(depth);
+					}
+					else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
+						return this.getInf().nbLeafs();
+					}
+				}
+			}
+			else{ //this.getInf is null
+				if(!(this.getEq() == null)){
+					if(!(this.getSup() == null)){
+						return this.getEq().totalLeafDepth(depth) + this.getSup().totalLeafDepth(depth);
+					}
+					else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
+						return this.getEq().totalLeafDepth(depth);
+					}
+				}
+				else{ // this.getInf is null ; this.getEq is null
+					if(!(this.getSup() == null)){
+						return this.getSup().totalLeafDepth(depth);
+					}
+					else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
+						  // case already treated with isLeaf() ...
+						return 0;
+					}
+				}
+			}
 		}
 	}
 	
@@ -234,30 +471,30 @@ public class HybridTrie {
 		if(word.length() == 1){
 			if(this.getCharacter() == c){
 				this.value = 0;
-				return (this.getInf().isEmpty() 
-						&& this.getEq().isEmpty() 
-						&& this.getSup().isEmpty());
+				return (this.getInf() == null 
+						&& this.getEq() == null 
+						&& this.getSup() == null);
 			}
 		}
 		
 		if(c < this.getCharacter()){
 			if(this.getInf().delWord(word)){
-				this.setInf(new HybridTrie());
+				this.setInf(null);
 			}
 		}
 		if(c > this.getCharacter()){
 			if(this.getSup().delWord(word)){
-				this.setSup(new HybridTrie());
+				this.setSup(null);
 			}
 		}
 		if(c == this.getCharacter()){
 			if(this.getEq().delWord(word.substring(1, word.length()))){
-				this.setEq(new HybridTrie());
+				this.setEq(null);
 			}
 		}
-		return (this.getInf().isEmpty() 
-				&& this.getEq().isEmpty() 
-				&& this.getSup().isEmpty()
+		return (this.getInf() == null 
+				&& this.getEq() == null 
+				&& this.getSup() == null
 				&& this.getValue() == 0);
 		
 	}
@@ -285,23 +522,22 @@ private HybridTrie searchWordTree(String word){
 			}
 		}
 		if(c<this.character){
-			if(!this.getInf().isEmpty())
+			if(!(this.getInf() == null))
 				return this.getInf().searchWordTree(word);
 			else
 				return null;
 		}
 		if(c>this.character){
-			if(!this.getSup().isEmpty())
+			if(!(this.getSup() == null))
 				return this.getSup().searchWordTree(word);
 			else
 				return null;
 		}
 		if(c==this.character){
-			if(!this.getEq().isEmpty()){
+			if(!(this.getEq() == null)){
 				return this.getEq().searchWordTree(word.substring(1, word.length()));
 			}
 		}
-		
 		return null;		
 	}
 	
@@ -314,10 +550,16 @@ private HybridTrie searchWordTree(String word){
 		}
 		else{
 			if(t.getValue() != 0){
-				return 1+t.getEq().countWords();
+				if(!(t.getEq() == null))
+					return 1+t.getEq().countWords();
+				else
+					return 1;
 			}
 			else{
-				return t.getEq().countWords();
+				if(!(t.getEq() == null))
+					return t.getEq().countWords();
+				else
+					return 0;
 			}
 		}
 	}
@@ -328,17 +570,17 @@ private HybridTrie searchWordTree(String word){
 		t.setCharacter(this.getCharacter());
 		t.setValue(this.getValue());
 		
-		if(!this.getEq().isEmpty())
+		if(!(this.getEq() == null))
 			t.setEq(this.getEq().clone());
 		else
 			t.setEq(new HybridTrie());
 		
-		if(!this.getInf().isEmpty())
+		if(!(this.getInf() == null))
 			t.setInf(this.getInf().clone());
 		else
 			t.setInf(new HybridTrie());
 		
-		if(!this.getSup().isEmpty())
+		if(!(this.getSup() == null))
 			t.setSup(this.getSup().clone());
 		else
 			t.setSup(new HybridTrie());
