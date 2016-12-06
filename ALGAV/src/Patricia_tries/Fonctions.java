@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Stack;
 
 public class Fonctions {
 	
@@ -49,7 +47,7 @@ public class Fonctions {
 			return a;
 		}
 		if(word.charAt(0) == ' '){
-			a.setSon(word.charAt(0), new PatriciaTrie());
+			a.setSon(word.charAt(0), null);
 		}
 		
 		if(word.length()>1){
@@ -102,38 +100,25 @@ public class Fonctions {
 		String c = a.getKey(word.charAt(0));		
 		if(c!=null){
 			if(word.compareTo(c)==0){
-				a.setKey(word.charAt(0), new String());
+				if(a.getSon(word.charAt(0))==null){
+					a.setKey(word.charAt(0), null);
+					return a;
+				}
 				return a;
 			}
 			else{
 				String p = prefixe(c,word);
 				if(p.length()!=a.getKey(word.charAt(0)).length()){
-					System.out.println("Your word does not exist");
 					return null;
 				}
-				
 				String nextWord = word.substring(p.length());
-				
 				PatriciaTrie t = new PatriciaTrie();				
 				if(a.getSon(p.charAt(0))!=null){
-					a.setSon(word.charAt(0), a.getSon(word.charAt(0)));
 					t=deleteWord(nextWord,a.getSon(p.charAt(0)));
 					if(t==null){
-						System.out.println("Your word does not exist\n");
 						return a;
 					}
-					String s = new String();
-					if((s=t.notNullKey())==null){
-						a.setKey(nextWord.charAt(0),new String());
-						a.setSon(nextWord.charAt(0),t);
-						return a;
-					}else{
-						String w = a.getKey(word.charAt(0));
-						w.concat(s);
-						a.setKey(w.charAt(0),w);
-						a.setSon(word.charAt(0),a.getSon(s.charAt(0)));
-						return a;
-					}
+					a.setSon(p.charAt(0), t);
 				}
 				else{
 					if(nextWord.length()==0){
@@ -144,8 +129,7 @@ public class Fonctions {
 				}
 			}
 		}
-		System.out.println("Your word does not exist");
-		return null;
+		return a;
 	}
 
 	/** methode addListOfWords, ajoute un ensemble de mots (d'une phrase) dans un patricia trie
@@ -181,13 +165,11 @@ public class Fonctions {
 				return true;
 			}
 			else if(current_key.length() > word.length()){
-				System.out.println("Your word does not exist");
 				return false;
 			}
 			else{
 				String prefixe = prefixe(current_key,word);
 				if(prefixe.length()>current_key.length()){
-					System.out.println("Your word does not exist");
 					return false;
 				}
 				else{
@@ -204,7 +186,7 @@ public class Fonctions {
 		return false;
 	}
 	
-	/** mï¿½thode compteMots, compte le nombre de mots, dans un patricia-trie
+	/** méthode compteMots, compte le nombre de mots, dans un patricia-trie
 	 * 
 	 * @param a : PatriciaTrie
 	 * @return : int
@@ -247,6 +229,7 @@ public class Fonctions {
 		return res;
 		
 	}
+	
 	/** methode hauteur, calcule la hauteur d'un patricia-trie
 	 * 
 	 * @param a : PatriciaTrie
@@ -353,7 +336,7 @@ public class Fonctions {
 		}
 	}
 
-	/** methode listPath, liste le nom de tous les fichiers present dans un repertoire donnï¿½
+	/** methode listPath, liste le nom de tous les fichiers present dans un repertoire donné
 	 * 
 	 * @param path : File
 	 * @return : String []
@@ -369,4 +352,71 @@ public class Fonctions {
 	    return fichiers;
 	  }	
 
+	public static void complete_key(PatriciaTrie a, int i,String add){
+		if(a.getSon(i)!=null){
+			PatriciaTrie son = a.getSon(i);
+			if(son!=null){
+				for(int j = 0; j<son.getSons().length;j++){
+					String before = son.getKey(j);
+					String newKey = add+before;
+					System.out.println("NEW KEY " + newKey);
+
+					if(newKey!=null){
+						son.setKey(j, newKey);
+					}
+				}
+			}
+			else{
+				System.out.println("IN");
+				addWord(add, son);
+			}
+		}
+	}
+	
+	public static PatriciaTrie fusion (PatriciaTrie a, PatriciaTrie b){
+		if(a==null){
+			return b;
+		}
+		if(b==null){
+			return a;
+		}
+		
+		for(int i =0; i<a.getSons().length;i++){
+			if(a.getKey(i)!=null){
+				System.out.print("KEY" +a.getKey(i));
+				if(b.getKey(i)!=null){
+					String newKey = prefixe(a.getKey(i),b.getKey(i));
+					System.out.println("new key = " + newKey);
+					
+					System.out.println("a key = " + a.getKey(i));
+					System.out.println("b key = " + b.getKey(i));
+
+					String next_a = a.getKey(i).substring(newKey.length());
+					String next_b = b.getKey(i).substring(newKey.length());
+					System.out.println("b_new key = " + next_b);
+
+					a.setKey(i, newKey);
+					
+					if(next_a!=null && next_a.length()>0){
+						//System.out.println("next_a*->"+next_a+"*");
+						complete_key(a,i,next_a);
+					}
+					
+					if(next_b!=null && next_b.length()>0){
+						System.out.println("next_b="+next_b);
+						complete_key(b,i,next_b);
+					}
+				}
+				fusion(a.getSon(i),b.getSon(i));
+			}
+			
+			if(a.getKey(i)==null){
+				if(b.getKey(i)!=null){
+					a.setKey(i, b.getKey(i));
+					a.setSon(i, b.getSon(i));
+				}
+			}
+		}
+		return a;
+	}
 }
