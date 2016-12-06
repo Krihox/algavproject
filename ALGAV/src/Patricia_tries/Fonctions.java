@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Stack;
 
 public class Fonctions {
 	
@@ -36,6 +35,7 @@ public class Fonctions {
 	 * @return : PatriciaTrie a
 	 */
 	public static PatriciaTrie addWord(String word, PatriciaTrie a){
+		
 		if( (a==null || a.getKey(word.charAt(0))==null) ){
 			if(a==null){
 				a=new PatriciaTrie();
@@ -142,7 +142,9 @@ public class Fonctions {
 		String [] words = phrase.split(" ");
 		int i=0;
 		for(i=0;i<words.length;i++){
+			System.out.print("->"+ words[i]);
 			words[i]=words[i].concat(" ");
+			System.out.print("-*"+ words[i]);
 			addWord(words[i],a);
 		}
 		return a;
@@ -352,71 +354,5 @@ public class Fonctions {
 	    return fichiers;
 	  }	
 
-	public static void complete_key(PatriciaTrie a, int i,String add){
-		if(a.getSon(i)!=null){
-			PatriciaTrie son = a.getSon(i);
-			if(son!=null){
-				for(int j = 0; j<son.getSons().length;j++){
-					String before = son.getKey(j);
-					String newKey = add+before;
-					System.out.println("NEW KEY " + newKey);
 
-					if(newKey!=null){
-						son.setKey(j, newKey);
-					}
-				}
-			}
-			else{
-				System.out.println("IN");
-				addWord(add, son);
-			}
-		}
-	}
-	
-	public static PatriciaTrie fusion (PatriciaTrie a, PatriciaTrie b){
-		if(a==null){
-			return b;
-		}
-		if(b==null){
-			return a;
-		}
-		
-		for(int i =0; i<a.getSons().length;i++){
-			if(a.getKey(i)!=null){
-				System.out.print("KEY" +a.getKey(i));
-				if(b.getKey(i)!=null){
-					String newKey = prefixe(a.getKey(i),b.getKey(i));
-					System.out.println("new key = " + newKey);
-					
-					System.out.println("a key = " + a.getKey(i));
-					System.out.println("b key = " + b.getKey(i));
-
-					String next_a = a.getKey(i).substring(newKey.length());
-					String next_b = b.getKey(i).substring(newKey.length());
-					System.out.println("b_new key = " + next_b);
-
-					a.setKey(i, newKey);
-					
-					if(next_a!=null && next_a.length()>0){
-						//System.out.println("next_a*->"+next_a+"*");
-						complete_key(a,i,next_a);
-					}
-					
-					if(next_b!=null && next_b.length()>0){
-						System.out.println("next_b="+next_b);
-						complete_key(b,i,next_b);
-					}
-				}
-				fusion(a.getSon(i),b.getSon(i));
-			}
-			
-			if(a.getKey(i)==null){
-				if(b.getKey(i)!=null){
-					a.setKey(i, b.getKey(i));
-					a.setSon(i, b.getSon(i));
-				}
-			}
-		}
-		return a;
-	}
 }
