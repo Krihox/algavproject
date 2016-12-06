@@ -55,18 +55,18 @@ public class ExempleDeBase {
 		System.out.println("/////////////////////////////////////");
 		System.out.println("Liste des mots de l'arbre t :" + t.ListeMots());
 		
-		System.out.println("le mot 'fait' existe : " + t.search("fait"));
-		System.out.println("le mot 'clavie' existe : " + t.search("clavie"));
-		System.out.println("le mot 'clavier' existe :" + t.search("clavier"));
-		System.out.println("le mot 'clavierr' existe : " + t.search("clavierr"));
+		System.out.println("le mot 'fait' existe : " + t.Recherche("fait"));
+		System.out.println("le mot 'clavie' existe : " + t.Recherche("clavie"));
+		System.out.println("le mot 'clavier' existe :" + t.Recherche("clavier"));
+		System.out.println("le mot 'clavierr' existe : " + t.Recherche("clavierr"));
 		
-		System.out.println("nombre de mots : " + t.countWords());
+		System.out.println("nombre de mots : " + t.ComptageMots());
 		
-		System.out.println("hauteur moyenne : " + t.averageDepth());
+		System.out.println("hauteur moyenne : " + t.ProfondeurMoyenne());
 		
-		System.out.println("nombre de mots prefixés par 'dactylo' : " + t.numberPrefixOf("dactylo"));
-		System.out.println("nombre de mots prefixés par 'p' : " + t.numberPrefixOf("p"));
-		System.out.println("nombre de mots prefixés par 'abc' : " + t.numberPrefixOf("abc"));
+		System.out.println("nombre de mots prefixés par 'dactylo' : " + t.Prefixe("dactylo"));
+		System.out.println("nombre de mots prefixés par 'p' : " + t.Prefixe("p"));
+		System.out.println("nombre de mots prefixés par 'abc' : " + t.Prefixe("abc"));
 		
     }
 }

@@ -18,8 +18,8 @@ public class DisplayHybridTrie {
 		if(t.getSup() != null)
 			System.out.println("Le fils droit de la racine est :" + t.getSup().getCharacter());
 		
-		System.out.println(t.countNill());
-		System.out.println(t.height());
+		System.out.println(t.ComptageNill());
+		System.out.println(t.Hauteur());
 		
 		System.out.println("Liste des mots de l'arbre t :" + t.ListeMots());
 		
@@ -27,17 +27,17 @@ public class DisplayHybridTrie {
 		
 		t.displayWords("");
 		
-		HybridTrie t2 = t.deleteWord("att");
+		HybridTrie t2 = t.Suppression("att");
 		System.out.println("t2 words :");
 		t2.displayWords("");
 		
-		HybridTrie t3 = t.deleteWord("attends");
+		HybridTrie t3 = t.Suppression("attends");
 		System.out.println("t3 words :");
 		t3.displayWords("");
 		
 		
-		System.out.println("profondeur moyenne : " + t.averageDepth());
+		System.out.println("profondeur moyenne : " + t.ProfondeurMoyenne());
 		
-		System.out.println(t.numberPrefixOf("at"));
+		System.out.println(t.Prefixe("at"));
     }
 }

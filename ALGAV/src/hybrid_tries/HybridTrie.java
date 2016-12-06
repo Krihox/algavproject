@@ -126,13 +126,13 @@ public class HybridTrie {
 	}
 	
 	// Version avec les 'nill' initialis�s en tant que noeuds vides
-	/*public int countWords(){
+	/*public int ComptageMots(){
 		if(!this == null){
 			if(this.getValue() != 0){
-				return 1 + this.getInf().countWords() + this.getEq().countWords() + this.getSup().countWords();
+				return 1 + this.getInf().ComptageMots() + this.getEq().ComptageMots() + this.getSup().ComptageMots();
 			}
 			else{
-				return 0 + this.getInf().countWords() + this.getEq().countWords() + this.getSup().countWords();
+				return 0 + this.getInf().ComptageMots() + this.getEq().ComptageMots() + this.getSup().ComptageMots();
 			}
 		}
 		else{
@@ -141,39 +141,39 @@ public class HybridTrie {
 		
 	}*/
 
-	public int countWords(){
+	public int ComptageMots(){
 		
 		if(this.getValue() != 0){
 			if(!(this.getInf() == null)){
 				if(!(this.getEq() == null)){
 					if(!(this.getSup() == null)){
-						return 1 + this.getInf().countWords() + this.getEq().countWords() + this.getSup().countWords();
+						return 1 + this.getInf().ComptageMots() + this.getEq().ComptageMots() + this.getSup().ComptageMots();
 					}
 					else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
-						return 1 + this.getInf().countWords() + this.getEq().countWords();
+						return 1 + this.getInf().ComptageMots() + this.getEq().ComptageMots();
 					}
 				}
 				else{ // this.getInf is non-null ; this.getEq is null
 					if(!(this.getSup() == null)){
-						return 1 + this.getInf().countWords() + this.getSup().countWords();
+						return 1 + this.getInf().ComptageMots() + this.getSup().ComptageMots();
 					}
 					else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
-						return 1 + this.getInf().countWords();
+						return 1 + this.getInf().ComptageMots();
 					}
 				}
 			}
 			else{ //this.getInf is null
 				if(!(this.getEq() == null)){
 					if(!(this.getSup() == null)){
-						return 1 + this.getEq().countWords() + this.getSup().countWords();
+						return 1 + this.getEq().ComptageMots() + this.getSup().ComptageMots();
 					}
 					else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
-						return 1 + this.getEq().countWords();
+						return 1 + this.getEq().ComptageMots();
 					}
 				}
 				else{ // this.getInf is null ; this.getEq is null
 					if(!(this.getSup() == null)){
-						return 1 + this.getSup().countWords();
+						return 1 + this.getSup().ComptageMots();
 					}
 					else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
 						return 1;
@@ -185,33 +185,33 @@ public class HybridTrie {
 			if(!(this.getInf() == null)){
 				if(!(this.getEq() == null)){
 					if(!(this.getSup() == null)){
-						return 0 + this.getInf().countWords() + this.getEq().countWords() + this.getSup().countWords();
+						return 0 + this.getInf().ComptageMots() + this.getEq().ComptageMots() + this.getSup().ComptageMots();
 					}
 					else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
-						return 0 + this.getInf().countWords() + this.getEq().countWords();
+						return 0 + this.getInf().ComptageMots() + this.getEq().ComptageMots();
 					}
 				}
 				else{ // this.getInf is non-null ; this.getEq is null
 					if(!(this.getSup() == null)){
-						return 0 + this.getInf().countWords() + this.getSup().countWords();
+						return 0 + this.getInf().ComptageMots() + this.getSup().ComptageMots();
 					}
 					else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
-						return 0 + this.getInf().countWords();
+						return 0 + this.getInf().ComptageMots();
 					}
 				}
 			}
 			else{ //this.getInf is null
 				if(!(this.getEq() == null)){
 					if(!(this.getSup() == null)){
-						return 0 + this.getEq().countWords() + this.getSup().countWords();
+						return 0 + this.getEq().ComptageMots() + this.getSup().ComptageMots();
 					}
 					else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
-						return 0 + this.getEq().countWords();
+						return 0 + this.getEq().ComptageMots();
 					}
 				}
 				else{ // this.getInf is null ; this.getEq is null
 					if(!(this.getSup() == null)){
-						return 0 + this.getSup().countWords();
+						return 0 + this.getSup().ComptageMots();
 					}
 					else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
 						return 0;
@@ -223,46 +223,46 @@ public class HybridTrie {
 	
 
 	// Version avec les 'nill' initialis�s en tant que noeuds vides
-	/*public int countNill(){
+	/*public int ComptageNill(){
 		if(!this.isEmpty()){
-			return 0 + this.getInf().countNill() + this.getEq().countNill() + this.getSup().countNill();
+			return 0 + this.getInf().ComptageNill() + this.getEq().ComptageNill() + this.getSup().ComptageNill();
 		}
 		else{
 			return 1;
 		}
 	}*/
 	
-	public int countNill(){
+	public int ComptageNill(){
 		if(!(this.getInf() == null)){
 			if(!(this.getEq() == null)){
 				if(!(this.getSup() == null)){
-					return this.getInf().countNill() + this.getEq().countNill() + this.getSup().countNill();
+					return this.getInf().ComptageNill() + this.getEq().ComptageNill() + this.getSup().ComptageNill();
 				}
 				else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
-					return 1 + this.getInf().countNill() + this.getEq().countNill();
+					return 1 + this.getInf().ComptageNill() + this.getEq().ComptageNill();
 				}
 			}
 			else{ // this.getInf is non-null ; this.getEq is null
 				if(!(this.getSup() == null)){
-					return 1 + this.getInf().countNill() + this.getSup().countNill();
+					return 1 + this.getInf().ComptageNill() + this.getSup().ComptageNill();
 				}
 				else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
-					return 2 + this.getInf().countNill();
+					return 2 + this.getInf().ComptageNill();
 				}
 			}
 		}
 		else{ //this.getInf is null
 			if(!(this.getEq() == null)){
 				if(!(this.getSup() == null)){
-					return 1 + this.getEq().countNill() + this.getSup().countNill();
+					return 1 + this.getEq().ComptageNill() + this.getSup().ComptageNill();
 				}
 				else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
-					return 2 + this.getEq().countNill();
+					return 2 + this.getEq().ComptageNill();
 				}
 			}
 			else{ // this.getInf is null ; this.getEq is null
 				if(!(this.getSup() == null)){
-					return 2 + this.getSup().countNill();
+					return 2 + this.getSup().ComptageNill();
 				}
 				else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
 					return 3;
@@ -271,7 +271,7 @@ public class HybridTrie {
 		}
 	}
 	
-	public Boolean search(String word){
+	public Boolean Recherche(String word){
 		if(word.length() == 0){
 			return false;
 		}
@@ -280,13 +280,13 @@ public class HybridTrie {
 			if(this.getInf() == null){
 				return false;
 			}
-			return this.getInf().search(word);			
+			return this.getInf().Recherche(word);			
 		}
 		else if (c > this.character){
 			if(this.getSup() == null){
 				return false;
 			}
-			return this.getSup().search(word);
+			return this.getSup().Recherche(word);
 		}
 		else{
 			if(word.length()==1){
@@ -300,7 +300,7 @@ public class HybridTrie {
 			if(this.getEq() == null){
 				return false;
 			}
-			return this.getEq().search(word.substring(1, word.length()));
+			return this.getEq().Recherche(word.substring(1, word.length()));
 		}
 	}
 	
@@ -313,46 +313,46 @@ public class HybridTrie {
 	}
 	
 	// Version avec les 'nill' initialis�s en tant que noeuds vides
-	/*public int height(){
+	/*public int Hauteur(){
 		if(!this.isEmpty()){
-			return 1 + max(this.getInf().height(),  this.getEq().height(), this.getSup().height());
+			return 1 + max(this.getInf().Hauteur(),  this.getEq().Hauteur(), this.getSup().Hauteur());
 		}
 		else{
 			return 1;
 		}
 	}*/
 	
-	public int height(){
+	public int Hauteur(){
 		if(!(this.getInf() == null)){
 			if(!(this.getEq() == null)){
 				if(!(this.getSup() == null)){
-					return 1 + max(this.getInf().height(), this.getEq().height(), this.getSup().height());
+					return 1 + max(this.getInf().Hauteur(), this.getEq().Hauteur(), this.getSup().Hauteur());
 				}
 				else{ //this.getInf is non-null ; this.getEq is non-null ; this.getSup is null
-					return 1 + max(this.getInf().height(), this.getEq().height(), 0);
+					return 1 + max(this.getInf().Hauteur(), this.getEq().Hauteur(), 0);
 				}
 			}
 			else{ // this.getInf is non-null ; this.getEq is null
 				if(!(this.getSup() == null)){
-					return 1 + max(this.getInf().height(), 0, this.getSup().height());
+					return 1 + max(this.getInf().Hauteur(), 0, this.getSup().Hauteur());
 				}
 				else{ // this.getInf is non-null ; this.getEq is null ; this.getSup is null
-					return 1 + this.getInf().height();
+					return 1 + this.getInf().Hauteur();
 				}
 			}
 		}
 		else{ //this.getInf is null
 			if(!(this.getEq() == null)){
 				if(!(this.getSup() == null)){
-					return 1 + max(0, this.getEq().height(), this.getSup().height());
+					return 1 + max(0, this.getEq().Hauteur(), this.getSup().Hauteur());
 				}
 				else{ //this.getInf is null ; this.getEq is non-null ; this.getSup is null
-					return 1 + this.getEq().height();
+					return 1 + this.getEq().Hauteur();
 				}
 			}
 			else{ // this.getInf is null ; this.getEq is null
 				if(!(this.getSup() == null)){
-					return 1 + this.getSup().height();
+					return 1 + this.getSup().Hauteur();
 				}
 				else{ // this.getInf is null ; this.getEq is null ; this.getSup is null
 					return 1;
@@ -486,7 +486,7 @@ public class HybridTrie {
 		}
 	}
 	
-	public int averageDepth(){
+	public int ProfondeurMoyenne(){
 		//0 if root shouldn't be included into the depth ; 1 if it does
 		return this.totalLeafDepth(0) / this.nbLeafs();
 	}
@@ -527,9 +527,9 @@ public class HybridTrie {
 		
 	}
 	
-	public HybridTrie deleteWord(String word){
+	public HybridTrie Suppression(String word){
 		HybridTrie t = this.clone();
-		if(t.search(word)){
+		if(t.Recherche(word)){
 			t.delWord(word);
 			return t;
 		}
@@ -570,7 +570,7 @@ private HybridTrie searchWordTree(String word){
 	}
 	
 	
-	public int numberPrefixOf(String word){
+	public int Prefixe(String word){
 		HybridTrie t = this.searchWordTree(word);
 		
 		if(t == null){
@@ -579,13 +579,13 @@ private HybridTrie searchWordTree(String word){
 		else{
 			if(t.getValue() != 0){
 				if(!(t.getEq() == null))
-					return 1+t.getEq().countWords();
+					return 1+t.getEq().ComptageMots();
 				else
 					return 1;
 			}
 			else{
 				if(!(t.getEq() == null))
-					return t.getEq().countWords();
+					return t.getEq().ComptageMots();
 				else
 					return 0;
 			}

@@ -56,7 +56,7 @@ public class Fonctions {
 			long fin = System.currentTimeMillis();
 			String texte [] = file.split("/");
 			String txt=texte[texte.length-1];
-			System.out.println("Temps de construction de l'Hybrid trie du fichier " + txt +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + h.countWords());
+			System.out.println("Temps de construction de l'Hybrid trie du fichier " + txt +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + h.ComptageMots());
 			return h;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -111,7 +111,7 @@ public class Fonctions {
 			}
 		}
 		long fin = System.currentTimeMillis();
-		System.out.println("Temps de construction de l'Hybrid trie des fichiers" +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + h.countWords());
+		System.out.println("Temps de construction de l'Hybrid trie des fichiers" +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + h.ComptageMots());
 
 		return h;
 	}
