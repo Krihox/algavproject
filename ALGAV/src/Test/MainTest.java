@@ -10,7 +10,7 @@ public class MainTest {
 	
 	public static void main(String[] args) {
 		
-		File shakespeare = new File("/users/nfs/Etu7/3600157/Documents/testalgavproject/algavproject/ALGAV/Shakespeare/");
+		File shakespeare =new File("/users/nfs/Etu7/3600157/Documents/testalgavproject/algavproject/ALGAV/Shakespeare/");
 		String[] files = Fonctions.listPath(shakespeare);
 		
 		/*for(int i=0; i< files.length; i++)
@@ -31,6 +31,7 @@ public class MainTest {
 		Patricia_tries.Fonctions.addWord("graymalvzdlkgp", p);
 		long fin1 = System.currentTimeMillis();
 		
+		System.out.println("**\nAjout**");
 		System.out.println("Temps d'ajout d'un nouveau mot dans l'hybrid trie :" + (fin-deb));
 		System.out.println("Temps d'ajout d'un nouveau mot dans le patricia trie :" + (fin1-deb1));
 		
@@ -44,22 +45,25 @@ public class MainTest {
 		h.Suppression("donalbain");
 		fin = System.currentTimeMillis();
 		
-//		deb1 = System.currentTimeMillis();
-//		Patricia_tries.Fonctions.Suppression("what ",p);
-//		Patricia_tries.Fonctions.Suppression("lightning ",p);
-//		Patricia_tries.Fonctions.Suppression("hurlyburly ",p);
-//		Patricia_tries.Fonctions.Suppression("heath ",p);
-//		Patricia_tries.Fonctions.Suppression("graymalkin ",p);
-//		Patricia_tries.Fonctions.Suppression("and ",p);
-//		Patricia_tries.Fonctions.Suppression("donalbain ",p);
-//		fin1 = System.currentTimeMillis();
+		deb1 = System.currentTimeMillis();
+		Patricia_tries.Fonctions.deleteWord("what ",p);
+		Patricia_tries.Fonctions.deleteWord("lightning ",p);
+		Patricia_tries.Fonctions.deleteWord("hurlyburly ",p);
+		Patricia_tries.Fonctions.deleteWord("heath ",p);
+		Patricia_tries.Fonctions.deleteWord("graymalkin ",p);
+		Patricia_tries.Fonctions.deleteWord("and ",p);
+		Patricia_tries.Fonctions.deleteWord("donalbain ",p);
+		fin1 = System.currentTimeMillis();
 		
+		System.out.println("\n**Suppression**");
 		System.out.println("Temps de suppression de 7 mots dans l'hybrid trie :" + (fin-deb));
-		//System.out.println("Temps de suppression de 7 mots dans le patricia trie :" + (fin1-deb1));
+		System.out.println("Temps de suppression de 7 mots dans le patricia trie :" + (fin1-deb1));
 		
+		System.out.println("\n**Profondeur**");
 		System.out.println("Profondeur de l'hybrid trie :" + h.Hauteur());
 		System.out.println("Profondeur du patricia trie :" + Patricia_tries.Fonctions.hauteur(p));
 		
+		System.out.println("\n**Pointeur Nil**");
 		System.out.println("Nombre de pointeurs vers nill dans l'hybrid trie :" + h.ComptageNill());
 		System.out.println("Nombre de pointeurs vers nill dans le patricia trie :" + Patricia_tries.Fonctions.compteNil(p));
 		
@@ -71,6 +75,7 @@ public class MainTest {
 		int nb_prefixe_p = Patricia_tries.Fonctions.searchPrefixe("wh", p);
 		fin1 = System.currentTimeMillis();
 		
+		System.out.println("\n**Nombre de mots ayant un prefixe donne**");
 		System.out.println("Nombre de mots prefixes par 'wh' dans l'hybrid trie :" + nb_prefixe_h);
 		System.out.println("Temps de calcul des prefixes de 'wh' dans l'hybrid trie :" + (fin-deb));
 		System.out.println("Nombre de mots prefixes par 'wh' dans le patricia trie :" + nb_prefixe_p);
