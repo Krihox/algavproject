@@ -20,7 +20,10 @@ public class DisplayHybridTrie {
 		
 		System.out.println(t.countNill());
 		System.out.println(t.height());
-		System.out.println();
+		
+		System.out.println("Liste des mots de l'arbre t :" + t.ListeMots());
+		
+		System.out.println("/////////////////////////////////////");
 		
 		t.displayWords("");
 		

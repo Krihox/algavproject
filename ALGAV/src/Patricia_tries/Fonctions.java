@@ -111,6 +111,7 @@ public class Fonctions {
 					System.out.println("Your word does not exist");
 					return null;
 				}
+				
 				String nextWord = word.substring(p.length());
 				
 				PatriciaTrie t = new PatriciaTrie();				
@@ -203,7 +204,7 @@ public class Fonctions {
 		return false;
 	}
 	
-	/** méthode compteMots, compte le nombre de mots, dans un patricia-trie
+	/** mï¿½thode compteMots, compte le nombre de mots, dans un patricia-trie
 	 * 
 	 * @param a : PatriciaTrie
 	 * @return : int
@@ -352,7 +353,7 @@ public class Fonctions {
 		}
 	}
 
-	/** methode listPath, liste le nom de tous les fichiers present dans un repertoire donné
+	/** methode listPath, liste le nom de tous les fichiers present dans un repertoire donnï¿½
 	 * 
 	 * @param path : File
 	 * @return : String []

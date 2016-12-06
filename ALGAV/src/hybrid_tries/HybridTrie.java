@@ -97,7 +97,35 @@ public class HybridTrie {
 		}
 	}
 	
-	// Version avec les 'nill' initialisés en tant que noeuds vides
+	private void remplirListe(ArrayList<String> list, String current_word){
+		if(!(this.getInf() == null)){
+			this.getInf().remplirListe(list, current_word);
+		}
+		if(this.getValue()!= 0){
+			current_word+=this.getCharacter();
+			list.add(current_word);
+			current_word = current_word.substring(0,current_word.length()-1);
+		}
+		if(!(this.getEq() == null)){
+			current_word+=this.getCharacter();
+			this.getEq().remplirListe(list, current_word);
+			current_word = current_word.substring(0,current_word.length()-1);
+		}
+		if(!(this.getSup() == null)){
+			this.getSup().remplirListe(list, current_word);
+		}
+	}
+	
+	public ArrayList<String> ListeMots(){
+		ArrayList<String> words_list = new ArrayList<String>();
+		
+		this.remplirListe(words_list, "");
+		
+		return words_list;
+		
+	}
+	
+	// Version avec les 'nill' initialisï¿½s en tant que noeuds vides
 	/*public int countWords(){
 		if(!this == null){
 			if(this.getValue() != 0){
@@ -194,7 +222,7 @@ public class HybridTrie {
 	}
 	
 
-	// Version avec les 'nill' initialisés en tant que noeuds vides
+	// Version avec les 'nill' initialisï¿½s en tant que noeuds vides
 	/*public int countNill(){
 		if(!this.isEmpty()){
 			return 0 + this.getInf().countNill() + this.getEq().countNill() + this.getSup().countNill();
@@ -284,7 +312,7 @@ public class HybridTrie {
 		return c;
 	}
 	
-	// Version avec les 'nill' initialisés en tant que noeuds vides
+	// Version avec les 'nill' initialisï¿½s en tant que noeuds vides
 	/*public int height(){
 		if(!this.isEmpty()){
 			return 1 + max(this.getInf().height(),  this.getEq().height(), this.getSup().height());
@@ -341,7 +369,7 @@ public class HybridTrie {
 		return false;
 	}
 	
-	// Version avec les 'nill' initialisés en tant que noeuds vides
+	// Version avec les 'nill' initialisï¿½s en tant que noeuds vides
 	/*private int nbLeafs(){
 		if (this.isEmpty())
 			return 0;

@@ -52,6 +52,8 @@ public class ExempleDeBase {
 		t.addKey("?", cpt++);
 		
 		t.displayWords("");
+		System.out.println("/////////////////////////////////////");
+		System.out.println("Liste des mots de l'arbre t :" + t.ListeMots());
 		
 		System.out.println("le mot 'fait' existe : " + t.search("fait"));
 		System.out.println("le mot 'clavie' existe : " + t.search("clavie"));
