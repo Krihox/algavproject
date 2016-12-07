@@ -8,6 +8,8 @@ public class HybridTrie {
 	private int value;
 	private HybridTrie[] children = new HybridTrie[3];
 	
+	private static final int THRESHOLD = 1;
+	
 	public HybridTrie(){
 		this.setCharacter('0');
 		this.setValue(0);
@@ -67,6 +69,73 @@ public class HybridTrie {
 				}
 			}
 		}
+	}
+	
+	private int countLeftNodes(){
+		int cpt = 0;
+		if(this.getInf() != null)
+			if(this.getEq() != null)
+				cpt += max(1+this.getInf().countLeftNodes(), this.getEq().countLeftNodes());
+			else
+				cpt += 1 +this.getInf().countLeftNodes();
+		else{
+			if(this.getEq() != null)
+				cpt += this.getEq().countLeftNodes();
+		}
+		return cpt;
+	}
+	
+	private int countRightNodes(){
+		int cpt = 0;
+		if(this.getSup() != null)
+			if(this.getEq() != null)
+				cpt += max(1+this.getSup().countLeftNodes(), this.getEq().countLeftNodes());
+			else
+				cpt += 1 +this.getSup().countLeftNodes();
+		else{
+			if(this.getEq() != null)
+				cpt += this.getEq().countLeftNodes();
+		}
+		return cpt;
+	}
+	
+	private HybridTrie equilibrage(){
+		
+		 ArrayList<String> words_list = this.ListeMots();		 
+		 String[] words_to_insert = new String[words_list.size()];
+		 
+		 int indexOfMiddle = words_list.size()/2 + words_list.size()%2 - 1;
+		 
+		 int j=0;
+		 for(int i = 0; i<words_list.size()-1; i+=2){
+			 words_to_insert[i] = words_list.get(indexOfMiddle+j);
+			 j++;
+		 }
+		 
+		 if(indexOfMiddle%2 == 0)
+			 words_to_insert[words_list.size()-1] = words_list.get(indexOfMiddle+j);
+		 
+		 j=1;
+		 for(int i = 1; i<words_list.size(); i+=2){
+			 words_to_insert[i] = words_list.get(indexOfMiddle-j);
+			 j++;
+		 }
+		 
+		 HybridTrie t = new HybridTrie();
+		 
+		 for(int i=0; i<words_to_insert.length;i++){
+			 t.addKey(words_to_insert[i], i+1);
+		 }
+		 
+		 return t;		 
+	}
+	
+	public HybridTrie addEquilibrage(String key, int value){
+		this.addKey(key,value);
+		if(!(Math.abs(this.countLeftNodes() - this.countRightNodes()) > THRESHOLD))
+			return this;
+		else
+			return this.equilibrage();
 	}
 	
 	public Boolean isEmpty(){
@@ -302,6 +371,13 @@ public class HybridTrie {
 			}
 			return this.getEq().Recherche(word.substring(1, word.length()));
 		}
+	}
+	
+	private int max(int a, int b){
+		if (a>b)
+			return a;
+		else
+			return b;
 	}
 	
 	private int max(int a, int b, int c){
