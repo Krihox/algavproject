@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Fonctions {
@@ -142,9 +143,7 @@ public class Fonctions {
 		String [] words = phrase.split(" ");
 		int i=0;
 		for(i=0;i<words.length;i++){
-			System.out.print("->"+ words[i]);
 			words[i]=words[i].concat(" ");
-			System.out.print("-*"+ words[i]);
 			addWord(words[i],a);
 		}
 		return a;
@@ -353,6 +352,56 @@ public class Fonctions {
 	    }
 	    return fichiers;
 	  }	
+	
+	/*** methode listerMots, parcours un patricia trie de maniere prefixe pour recuperer les mots contenu dans le trie
+	 * 
+	 * @param a : PatriciaTrie
+	 * @param prefixe : le prefixe d'un mot
+	 * @param l : la liste de mots
+	 */
 
+	public static void listerMots (PatriciaTrie a,String prefixe, ArrayList<String> l){
+		if(a==null){
+			return ;
+		}
+		
+		for(int i =0; i<a.getSons().length;i++){
+			if(a.getKey(i)!=null && !a.getKey(i).contains(" ")){
+				if(a.getSon(i)!=null){
+					PatriciaTrie aa = a.getSon(i);
+					listerMots(aa,prefixe+a.getKey(i),l);
+				}	
+			}
+			else if(a.getKey(i)!=null && a.getKey(i).contains(" ")){
+				l.add(prefixe+a.getKey(i));
 
+			}
+		}
+	}
+	
+	/*** la methode listeMots, renvoie une liste contenant tous les mots présent dans un Patricia-trie
+	 * 
+	 * @param a: PatriciaTrie
+	 * @return : ArrayList<String>
+	 */
+	
+	public static ArrayList<String> listeMots(PatriciaTrie a){
+		ArrayList<String> list = new ArrayList<String>();
+		listerMots(a,"",list);
+		return list;
+	}
+	
+	/*** la methode afficheListeMots, affiche les mots contenus dans une liste
+	 * 
+	 * @param list : ArrayList<String>
+	 */
+	public static void afficheListeMots(ArrayList<String> list){
+		System.out.print("|");
+		for(int i = 0; i< list.size();i++){
+			System.out.print(list.get(i)+"|");
+		}
+		System.out.println();
+	}
+	
+	
 }
