@@ -21,8 +21,8 @@ public class OperationsOnTriesTest {
 	PatriciaTrie p = Fonctions.fill_PatriciaTrie(files);
 	long elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps d'ajout de tous les mots de l'oeuvre de Shakespeare dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps d'ajout de tous les mots de l'oeuvre de Shakespeare dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps d'ajout de tous les mots de l'oeuvre de Shakespeare dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps d'ajout de tous les mots de l'oeuvre de Shakespeare dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -40,8 +40,8 @@ public class OperationsOnTriesTest {
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps d'ajout de dix mots dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps d'ajout de dix mots dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps d'ajout de dix mots dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps d'ajout de dix mots dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -67,8 +67,8 @@ public class OperationsOnTriesTest {
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps d'ajout de cinquante mots non existants dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps d'ajout de cinquante mots non existants dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps d'ajout de cinquante mots non existants dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps d'ajout de cinquante mots non existants dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -84,8 +84,8 @@ public class OperationsOnTriesTest {
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps d'ajout de cinquante mots existants dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps d'ajout de cinquante mots  existants dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps d'ajout de cinquante mots existants dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps d'ajout de cinquante mots  existants dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -101,8 +101,8 @@ public class OperationsOnTriesTest {
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps de suppression de cinquante mots dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps de suppression de cinquante mots dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps de suppression de cinquante mots dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps de suppression de cinquante mots dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -118,8 +118,8 @@ public class OperationsOnTriesTest {
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps de recherche de dix mots recemment inseres dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps de recherche de dix mots recemment inseres dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps de recherche de dix mots recemment inseres dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps de recherche de dix mots recemment inseres dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -142,8 +142,8 @@ public class OperationsOnTriesTest {
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps de recherche de vingt mots courants en anglais dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps de recherche de vingt mots courants en anglais dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps de recherche de vingt mots courants en anglais dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps de recherche de vingt mots courants en anglais dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -159,8 +159,8 @@ public class OperationsOnTriesTest {
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Temps de recherche de cinquante mots non existants dans l'hybrid trie : " + elapsed_h + "ns");
-	System.out.println("Temps de recherche de cinquante mots non existants dans le patricia trie : " + elapsed_p + "ns");
+	System.out.println("Temps de recherche de cinquante mots non existants dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps de recherche de cinquante mots non existants dans le patricia trie : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
 	
@@ -172,9 +172,49 @@ public class OperationsOnTriesTest {
 	int height_p = Patricia_tries.Fonctions.hauteur(p);
 	elapsed_p = System.nanoTime() - deb_p;
 	
-	System.out.println("Hauteur de l'hybrid trie : " + height_h + " ; Temps de calcul : " + elapsed_h + "ns");
-	System.out.println("Hauteur du Patricia trie : " + height_p + " ; Temps de calcul : " + elapsed_p + "ns");
+	System.out.println("Hauteur de l'hybrid trie : " + height_h + " ; Temps de calcul : " + elapsed_h + " ns");
+	System.out.println("Hauteur du Patricia trie : " + height_p + " ; Temps de calcul : " + elapsed_p + " ns");
 	
 	System.out.println("-----------------------------------------------------------------------------");
+	
+	deb_h = System.nanoTime();
+	int average_depth_h = h.ProfondeurMoyenne();
+	elapsed_h = System.nanoTime() - deb_h;
+	
+	deb_p = System.nanoTime();
+	int average_depth_p = Patricia_tries.Fonctions.profondeurMoyenne(p);
+	elapsed_p = System.nanoTime() - deb_p;
+	
+	System.out.println("Profondeur moyenne de l'hybrid trie : " + average_depth_h + " ; Temps de calcul : " + elapsed_h + " ns");
+	System.out.println("Profondeur moyenne du Patricia trie : " + average_depth_p + " ; Temps de calcul : " + elapsed_p + " ns");
+	
+	System.out.println("-----------------------------------------------------------------------------");
+	
+	deb_h = System.nanoTime();
+	int nb_words_h = h.ComptageMots();
+	elapsed_h = System.nanoTime() - deb_h;
+	
+	deb_p = System.nanoTime();
+	int nb_words_p = Patricia_tries.Fonctions.compteMots(p);
+	elapsed_p = System.nanoTime() - deb_p;
+	
+	System.out.println("Nombre de mots dans l'hybrid trie : " + nb_words_h + " ; Temps de calcul : " + elapsed_h + " ns");
+	System.out.println("Nombre de mots dans le Patricia trie : " + nb_words_p + " ; Temps de calcul : " + elapsed_p + " ns");
+	
+	System.out.println("-----------------------------------------------------------------------------");
+	
+	deb_h = System.nanoTime();
+	h.ListeMots();
+	elapsed_h = System.nanoTime() - deb_h;
+	
+	deb_p = System.nanoTime();
+	Patricia_tries.Fonctions.listeMots(p);
+	elapsed_p = System.nanoTime() - deb_p;
+	
+	System.out.println("Temps de calcul de la récupération de la liste des mots dans l'hybrid trie : " + elapsed_h + " ns");
+	System.out.println("Temps de calcul de la récupération de la liste des mots dans le patricia trie : " + elapsed_p + " ns");
+	
+	System.out.println("-----------------------------------------------------------------------------");
+	
 	}
 }
