@@ -36,7 +36,8 @@ public class OperationsOnTriesTest {
 	
 	deb_p = System.nanoTime();
 	for(int i=0; i<words_to_insert_10.length; i++){
-		Patricia_tries.Fonctions.addWord(words_to_insert_10[i], p);
+		String tmp = words_to_insert_10[i]=words_to_insert_10[i]+" ";
+		Patricia_tries.Fonctions.addWord(tmp, p);
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
@@ -52,7 +53,7 @@ public class OperationsOnTriesTest {
 	String[] words_to_insert_50 = {"Quand", "les", "scientifiques", "ont", "voulu", "enoncer", "formellement",
 			"et", "rigoureusement", "ce", "qu", "est", "l", "efficacité", "d", "un", "algorithme", "ou", "au", "contraire",
 			"sa", "complexite", "ils", "se", "sont", "rendu", "compte", "que", "la", "comparaison", "des", "algorithmes",
-			"entre", "eux", "etait", "nécessaire", "outils", "pour", "le", "faire", "a", "epoque", "etaient",
+			"entre", "eux", "etait", "necessaire", "outils", "pour", "le", "faire", "a", "epoque", "etaient",
 			"primitifs", "Dans", "prehistoire", "de", "informatique", "les", "annees"};
 	
 	deb_h = System.nanoTime();
@@ -63,7 +64,9 @@ public class OperationsOnTriesTest {
 	
 	deb_p = System.nanoTime();
 	for(int i=0; i<words_to_insert_50.length; i++){
-		Patricia_tries.Fonctions.addWord(words_to_insert_50[i], p);
+		String tmp = words_to_insert_50[i]=words_to_insert_50[i]+" ";
+		Patricia_tries.Fonctions.addWord(tmp, p);
+		
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
@@ -80,7 +83,8 @@ public class OperationsOnTriesTest {
 	
 	deb_p = System.nanoTime();
 	for(int i=0; i<words_to_insert_50.length; i++){
-		Patricia_tries.Fonctions.addWord(words_to_insert_50[i], p);
+		String tmp = words_to_insert_50[i]=words_to_insert_50[i]+" ";
+		Patricia_tries.Fonctions.addWord(tmp, p);
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
@@ -97,7 +101,8 @@ public class OperationsOnTriesTest {
 	
 	deb_p = System.nanoTime();
 	for(int i=0; i<words_to_insert_50.length; i++){
-		Patricia_tries.Fonctions.deleteWord(words_to_insert_50[i], p);
+		String tmp = words_to_insert_50[i]=words_to_insert_50[i]+" ";
+		Patricia_tries.Fonctions.deleteWord(tmp, p);
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
@@ -114,7 +119,8 @@ public class OperationsOnTriesTest {
 	
 	deb_p = System.nanoTime();
 	for(int i=0; i<words_to_insert_10.length; i++){
-		Patricia_tries.Fonctions.searchWord(words_to_insert_10[i], p);
+		String tmp = words_to_insert_10[i]=words_to_insert_10[i]+" ";
+		Patricia_tries.Fonctions.searchWord(tmp, p);
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
@@ -138,7 +144,8 @@ public class OperationsOnTriesTest {
 	
 	deb_p = System.nanoTime();
 	for(int i=0; i<common_words_english_20.length; i++){
-		Patricia_tries.Fonctions.searchWord(common_words_english_20[i], p);
+		String tmp = common_words_english_20[i]=common_words_english_20[i]+" ";
+		Patricia_tries.Fonctions.searchWord(tmp, p);
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
@@ -155,7 +162,8 @@ public class OperationsOnTriesTest {
 	
 	deb_p = System.nanoTime();
 	for(int i=0; i<words_to_insert_50.length; i++){
-		Patricia_tries.Fonctions.searchWord(words_to_insert_50[i], p);
+		String tmp = words_to_insert_50[i]+" ";
+		Patricia_tries.Fonctions.searchWord(tmp, p);
 	}
 	elapsed_p = System.nanoTime() - deb_p;
 	
