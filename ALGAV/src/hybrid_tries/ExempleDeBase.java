@@ -68,5 +68,12 @@ public class ExempleDeBase {
 		System.out.println("nombre de mots prefixés par 'p' : " + t.Prefixe("p"));
 		System.out.println("nombre de mots prefixés par 'abc' : " + t.Prefixe("abc"));
 		
+		System.out.println("Hauteur de h avant equilibrage : " + t.Hauteur());
+		System.out.println("Hauteur moyenne de h avant equilibrage : " + t.ProfondeurMoyenne());
+		t = t.Suppression("fait");
+		t = t.addEquilibrage("fait", 1);
+		System.out.println("Hauteur de h après equilibrage : " + t.Hauteur());
+		System.out.println("Hauteur moyenne de h apres equilibrage : " + t.ProfondeurMoyenne());
+		
     }
 }

@@ -32,8 +32,8 @@ public class MainTest {
 		long fin1 = System.currentTimeMillis();
 		
 		System.out.println("**\nAjout**");
-		System.out.println("Temps d'ajout d'un nouveau mot dans l'hybrid trie :" + (fin-deb));
-		System.out.println("Temps d'ajout d'un nouveau mot dans le patricia trie :" + (fin1-deb1));
+		System.out.println("Temps d'ajout d'un nouveau mot dans l'hybrid trie : " + (fin-deb) + "ms");
+		System.out.println("Temps d'ajout d'un nouveau mot dans le patricia trie : " + (fin1-deb1) + "ms");
 		
 		deb = System.currentTimeMillis();
 		h.Suppression("what");
@@ -56,8 +56,8 @@ public class MainTest {
 		fin1 = System.currentTimeMillis();
 		
 		System.out.println("\n**Suppression**");
-		System.out.println("Temps de suppression de 7 mots dans l'hybrid trie :" + (fin-deb));
-		System.out.println("Temps de suppression de 7 mots dans le patricia trie :" + (fin1-deb1));
+		System.out.println("Temps de suppression de 7 mots dans l'hybrid trie :" + (fin-deb) + "ms");
+		System.out.println("Temps de suppression de 7 mots dans le patricia trie :" + (fin1-deb1) + "ms");
 		
 		System.out.println("\n**Profondeur**");
 		System.out.println("Profondeur de l'hybrid trie :" + h.Hauteur());
@@ -81,5 +81,11 @@ public class MainTest {
 		System.out.println("Nombre de mots prefixes par 'wh' dans le patricia trie :" + nb_prefixe_p);
 		System.out.println("Temps de calcul des prefixes de 'wh' dans le patricia trie :" + (fin1-deb1));
 		
+		System.out.println("Hauteur de h avant equilibrage : " + h.Hauteur());
+		System.out.println("Profondeur moyenne de h avant equilibrage : " + h.ProfondeurMoyenne());
+		h = h.Suppression("what");
+		h = h.addEquilibrage("what", 1);
+		System.out.println("Hauteur de h après equilibrage : " + h.Hauteur());
+		System.out.println("Profondeur moyenne de h apres equilibrage : " + h.ProfondeurMoyenne());
     }
 }

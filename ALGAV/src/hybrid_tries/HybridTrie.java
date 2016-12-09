@@ -8,7 +8,7 @@ public class HybridTrie {
 	private int value;
 	private HybridTrie[] children = new HybridTrie[3];
 	
-	private static final int THRESHOLD = 1;
+	private static final int THRESHOLD = 0;
 	
 	public HybridTrie(){
 		this.setCharacter('0');
@@ -115,7 +115,7 @@ public class HybridTrie {
 		 if(indexOfMiddle%2 == 0)
 			 words_to_insert[words_list.size()-1] = words_list.get(indexOfMiddle+j);
 		 
-		 j=1;
+		 j=0;
 		 for(int i = 1; i<words_list.size(); i+=2){
 			 words_to_insert[i] = words_list.get(indexOfMiddle-j);
 			 j++;
