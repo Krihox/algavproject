@@ -33,8 +33,8 @@ public class Fonctions {
 				Patricia_tries.Fonctions.addWord(line,p);
 			}
 			//long fin = System.currentTimeMillis();
-			String texte [] = file.split("/");
-			String txt=texte[texte.length-1];
+			//String texte [] = file.split("/");
+			//String txt=texte[texte.length-1];
 			//System.out.println("Temps de construction du PatriciaTrie du fichier " + txt +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + Patricia_tries.Fonctions.compteMots(p));
 			return p;
 		} catch (IOException e) {
@@ -54,8 +54,8 @@ public class Fonctions {
 				cpt++;
 			}
 			//long fin = System.currentTimeMillis();
-			String texte [] = file.split("/");
-			String txt=texte[texte.length-1];
+			//String texte [] = file.split("/");
+			//String txt=texte[texte.length-1];
 			//System.out.println("Temps de construction de l'Hybrid trie du fichier " + txt +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + h.ComptageMots());
 			return h;
 		} catch (IOException e) {
@@ -71,7 +71,7 @@ public class Fonctions {
 	
 	public static PatriciaTrie fill_PatriciaTrie(String []files){
 		PatriciaTrie p=new PatriciaTrie();
-		long deb = System.currentTimeMillis();
+		//long deb = System.currentTimeMillis();
 
 		for(int i =0; i<files.length;i++){
 			try(BufferedReader br= new BufferedReader(new FileReader(files[i]))){
@@ -85,8 +85,8 @@ public class Fonctions {
 				return null;
 			}
 		}
-		long fin = System.currentTimeMillis();
-		System.out.println("Temps de construction du PatriciaTrie des fichiers" +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + Patricia_tries.Fonctions.compteMots(p));
+		//long fin = System.currentTimeMillis();
+		//System.out.println("Temps de construction du PatriciaTrie des fichiers" +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + Patricia_tries.Fonctions.compteMots(p));
 
 		return p;
 	}
@@ -95,7 +95,7 @@ public class Fonctions {
 	
 	public static HybridTrie fill_HybridTrie(String []files){
 		HybridTrie h=new HybridTrie();
-		long deb = System.currentTimeMillis();
+		//long deb = System.currentTimeMillis();
 		int cpt = 1;
 		for(int i =0; i<files.length;i++){
 			try(BufferedReader br= new BufferedReader(new FileReader(files[i]))){
@@ -110,8 +110,8 @@ public class Fonctions {
 				return null;
 			}
 		}
-		long fin = System.currentTimeMillis();
-		System.out.println("Temps de construction de l'Hybrid trie des fichiers" +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + h.ComptageMots());
+		//long fin = System.currentTimeMillis();
+		//System.out.println("Temps de construction de l'Hybrid trie des fichiers" +"\nest de : " + (fin-deb) + "ms\n" + "nombre de mots dans l'arbre:" + h.ComptageMots());
 
 		return h;
 	}

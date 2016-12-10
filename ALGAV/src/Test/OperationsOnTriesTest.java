@@ -10,7 +10,9 @@ public class OperationsOnTriesTest {
 	
 	public static void main(String[] args) {
 	
-	File shakespeare = new File("/users/nfs/Etu7/3600157/Documents/testalgavproject/algavproject/ALGAV/Shakespeare/");
+	String shakespeare_path = new File("Shakespeare/").getAbsolutePath();
+	File shakespeare = new File(shakespeare_path);
+	
 	String[] files = Fonctions.listPath(shakespeare);
 	
 	long deb_h = System.nanoTime();
