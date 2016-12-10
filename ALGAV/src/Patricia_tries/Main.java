@@ -11,7 +11,6 @@ public class Main {
 		Fonctions.addListOfWords(word2,p2);
 		long elapsed_h = System.nanoTime() - deb_h;
 		System.out.println("Temps de construction du Patricia-trie à partir des mots de l'exemple de base: " + elapsed_h+ "ns \n");
-		//p2.printTrie();
 		ArrayList<String> list= Fonctions.listeMots(p2);
 		System.out.println("Voici la liste des mots se trouvant dans le patricia trie, classee dans l'ordre alphabetique:");
 		Fonctions.afficheListeMots(list);	
@@ -21,7 +20,7 @@ public class Main {
 		System.out.println("profondeur du patricia trie: " + Fonctions.profondeurMoyenne(p2)+"\n");
 		System.out.println("nombre de mots prefixe par 'p': "+Fonctions.searchPrefixe("p", p2)+"\n");
 		Fonctions.deleteWord("redevables ", p2);
-		
 		System.out.println("le mot dacty existe-t-il? " + Fonctions.searchWord("dacty ",p2)+"\n");
+		p2.printTrie();
 	}
 }

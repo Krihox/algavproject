@@ -7,7 +7,7 @@ public class ExempleDeBase {
 		int cpt=1;
 		
 		HybridTrie t = new HybridTrie();
-		long deb_h = System.nanoTime();
+		long deb_h = System.nanoTime(); 
 		t.addKey("A", cpt++);
 		t.addKey("quel", cpt++);
 		t.addKey("genial", cpt++);
