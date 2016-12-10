@@ -7,6 +7,7 @@ public class ExempleDeBase {
 		int cpt=1;
 		
 		HybridTrie t = new HybridTrie();
+		long deb_h = System.nanoTime();
 		t.addKey("A", cpt++);
 		t.addKey("quel", cpt++);
 		t.addKey("genial", cpt++);
@@ -50,7 +51,8 @@ public class ExempleDeBase {
 		t.addKey("a", cpt++);
 		t.addKey("ecrire", cpt++);
 		t.addKey("?", cpt++);
-		
+		long elapsed_h = System.nanoTime() - deb_h;
+		System.out.println("Temps de construction de l'hybrid-trie avec les mots de l'exemple de base: " + elapsed_h + "ns");
 		t.displayWords("");
 		System.out.println("/////////////////////////////////////");
 		System.out.println("Liste des mots de l'arbre t :" + t.ListeMots());
