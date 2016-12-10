@@ -52,12 +52,14 @@ public class OperationsOnTriesTest {
 	/*
 	 * Source : Wikipedia -> Analyse de la complexité des algorithmes
 	 */
-	String[] words_to_insert_50 = {"Quand", "les", "scientifiques", "ont", "voulu", "enoncer", "formellement",
-			"et", "rigoureusement", "ce", "qu", "est", "l", "efficacité", "d", "un", "algorithme", "ou", "au", "contraire",
-			"sa", "complexite", "ils", "se", "sont", "rendu", "compte", "que", "la", "comparaison", "des", "algorithmes",
-			"entre", "eux", "etait", "necessaire", "outils", "pour", "le", "faire", "a", "epoque", "etaient",
-			"primitifs", "Dans", "prehistoire", "de", "informatique", "les", "annees"};
-	
+	String[] words_to_insert_50 = {"Quand", "SCientifiques", "Voulu", "eNOncer", "formELLement",
+			"rigoureuSEment", "eFFicacite", "COntraire", "compleXIte", "iLS", "sOnt", "Rendu",
+			"compARaison", "ETait", "nECessaire", "outils", "pOur", "fAire", "ePoque", "ETaient",
+			"PRimitifs", "DAns", "prehisTOire", "infORmatique", "anNEes", "publIEe", "ELle",
+			"existAIt", "SOuvent", "dePendante", "Processeur", "Utilise", "Temps", "Acces",
+			"apprOChe", "independaNte", "FActeurs", "MAteriels", "DonaldKnuth", "Systematiquement", 
+			"cOMbinee", "uNIquement", "DIchotomique", "Alphabetiquement", "ANnuaire", "LOgarithmique",
+			"Racinaire", "Linearithmique", "OlivierCarton", "RGarey"}; 	
 	deb_h = System.nanoTime();
 	for(int i=0; i<words_to_insert_50.length; i++){
 		h.addKey(words_to_insert_50[i], 1);

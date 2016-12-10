@@ -574,7 +574,7 @@ public class HybridTrie {
 		
 		if(word.length() == 1){
 			if(this.getCharacter() == c){
-				this.value = 0;
+				this.setValue(0);
 				return (this.getInf() == null 
 						&& this.getEq() == null 
 						&& this.getSup() == null);
